@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RuleManager.aspx.cs" Inherits="zuimei.Admin.Api.RuleManager" %>

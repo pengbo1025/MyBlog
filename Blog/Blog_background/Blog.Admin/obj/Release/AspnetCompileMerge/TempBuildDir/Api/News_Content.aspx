@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="News_Content.aspx.cs" Inherits="Blog.Api.News_Content" %>

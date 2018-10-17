@@ -1,0 +1,229 @@
+﻿@{
+    ViewBag.Title = "de";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Blog.DAL;
+<article id="azkaban-post" class="col-md-8">
+    <section class="azkaban-block azkaban-core clearfix">
+        <header class="azkaban-post-header">
+            <h1 class="azkaban-post-title text-center">
+                @News_ContentDao.GetTitle(int.Parse(Request.QueryString["NewsID"].ToString()))
+            </h1>
+            <div class="azkaban-post-meta text-center">
+                <span>
+                    @foreach (var item in ViewBag.NewsList)
+                    {
+                        <img src="~/Content/tubiao/%e6%97%a5%e6%9c%9f.bmp" style="width:20px;height:20px;" />
+                        @DateTime.Parse(item[0].ToString()).ToLongDateString()
+                    }
+                    <img src="~/Content/tubiao/%e8%af%84%e8%ae%ba.bmp" style="width:20px;height:20px;" />
+                    @News_ContentDao.GetReviewCount(int.Parse(Request.QueryString["NewsID"].ToString()))<span>条评论</span>
+
+                </span>
+            </div>
+        </header>
+
+        @*<script>
+                cambrian.render('body')
+            </script>*@
+        <div class="azkaban-post-content">
+
+            @foreach (var item in ViewBag.Details)
+            {
+                <input type="hidden" class="Newsid" value="@item[1]" />
+                if (item[3] == "文本")
+                {
+                    if (bool.Parse(item[6]) == true)
+                    {
+                        <h2 class="ravenclaw-h2">@item[2]</h2>
+                    }
+                    else
+                    {
+                        <p>
+                            @*用来转型，不然放置代码的<pre>标签无法使用*@
+                            @Html.Raw(item[2])
+                        </p>
+                    }
+
+                }
+
+                if (item[3] == "图片")
+                {
+                    <p>
+                        <img class="aligncenter size-full wp-image-1322" src="@item[2]" alt="" width="1000" height="526" sizes="(max-width: 1000px) 100vw, 1000px" layer-index="0">
+                    </p>
+                }
+            }
+
+        </div>
+
+        <footer class="azkaban-post-footer clearfix">
+            <div class="post-like-donate text-center clearfix dianzan" id="post-like-donate">
+                <a href="javascript:;" id="btn" data-action="love" data-id="2482" class="Love ">
+                    <img src="~/Content/tubiao/%e7%82%b9%e8%b5%9e.bmp" style="width:20px;height:20px;" />点赞
+                </a>
+            </div>
+
+        </footer>
+    </section>
+
+
+    <section class="azkaban-block azkaban-copyright text-center clearfix">
+        @*<img alt="知识共享许可协议" src="https://www.qcgzxw.cn/wp-content/themes/Azkaban/images/licenses.png">*@
+        <p>
+            本作品采用知识共享署名-相同方式共享 4.0 国际许可协议进行许可
+        </p>
+    </section>
+    <nav class="navigation post-navigation clearfix" role="navigation">
+        <div class="nav-previous clearfix">
+            <a href="">
+                &lt; 上一篇
+            </a>
+        </div>
+        <div class="nav-next">
+            <a href="">
+                下一篇 &gt;
+            </a>
+        </div>
+    </nav>
+
+    <script src="~/Scripts/xiazai/dazitexiao.js"></script>
+    @*<script>
+            POWERMODE.colorful = true;
+            POWERMODE.shake = true;
+            document.body.addEventListener('input', POWERMODE);
+        </script>*@
+
+
+    <div id="comments" class="comments-area">
+        <ol class="comment-list">
+
+            @foreach (var item in ViewBag.Review1)
+            {
+                <li class="comment even thread-even depth-1 parent" id="comment-2257">
+                    <div id="div-comment-2257" class="comment-body">
+                        <div class="comment-author vcard">
+                            <img src="~/Content/tubiao/t01d9addfce51c6da4d.jpg" width="50" height="50" alt="" class="avatar avatar-50wp-user-avatar wp-user-avatar-50 alignnone photo avatar-default"><br />
+                            <cite class="fn">
+                                @item[3]
+                            </cite>
+                            <span class="says">
+                                说道：
+                            </span>
+                        </div>
+                        <p>@item[2]</p>
+                        <div class="reply">
+                            <a rel="nofollow" class="comment-reply-link" href="#" onclick="return addComment.moveForm( &quot;div-comment-2257&quot;, &quot;2257&quot;, &quot;respond&quot;, &quot;2482&quot; )" aria-label="回复给清秋Blog">
+                                回复
+                            </a>
+                        </div>
+                    </div>
+
+                </li><!-- #comment-## -->
+            }
+
+
+
+        </ol>
+
+
+        <div id="respond" class="comment-respond">
+            <p id="reply-title" class="comment-reply-title">
+                发表评论
+
+            </p>
+
+            <div class="col-md-12">
+                <p class="comment-notes">
+                    在发表评论前请确认您的言论中没有违反中国各项法律、法规和违背社会道德的内容。任何无意义的留言内容都会被直接删除。
+                </p>
+            </div>
+            <div class="col-md-6">
+                <label class="sr-only">
+                    Name
+                </label>
+                <div class="input-group mb-md-0 mt-2">
+                    <div class="input-group-addon">
+                        
+                    </div>
+                   
+                    <input type="text" class="form-control" placeholder="昵称" id="author" name="author" required="required" value="">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label class="sr-only">
+                    E-mail
+                </label>
+                <div class="input-group mb-md-0 mt-2">
+                    <div class="input-group-addon">
+                        
+                    </div>
+                    
+                    <input type="email" class="form-control" placeholder="邮箱" id="email" name="email" required="required" value="">
+                </div>
+            </div>
+            <div class="col-md-12">
+                <textarea class="form-control mt-3" id="comment" name="comment" rows="7" required="" style="width:680px;height:200px;"></textarea>
+            </div>
+
+
+            <p class="form-submit">
+                <input name="submit" type="submit" id="submit" class="btn btn-primary  btn-block  fabiao" value="发表评论">
+
+            </p>
+
+        </div><!-- #respond -->
+    </div>
+</article>
+
+
+<section id="wp-cumulus" class="wp_cumulus_widget clearfix">
+    <div class="azkaban-sidebar-title">
+        3D标签云
+    </div> <!-- SWFObject embed by Geoff Stearns geoff@deconcept.com http://blog.deconcept.com/swfobject/ -->
+    <script type="text/javascript" src="https://www.qcgzxw.cn/wp-content/plugins/wp-cumulus/swfobject.js">
+    </script>
+    <div id="wpcumuluswidgetcontent5337143">
+        <embed type="application/x-shockwave-flash" src="https://www.qcgzxw.cn/wp-content/plugins/wp-cumulus/tagcloud.swf?r=7023167" width="300" height="300" id="tagcloudflash" name="tagcloudflash" bgcolor="#ffffff" quality="high" wmode="transparent" allowscriptaccess="always" flashvars="tcolor=0x333333&amp;tcolor2=0x333666&amp;hicolor=0x000000&amp;tspeed=150&amp;distr=true&amp;mode=tags&amp;tagcloud=%3Ctags%3E%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3Dapp%22+class%3D%22tag-cloud-link+tag-link-45+tag-link-position-1%22+style%3D%22font-size%3A+8pt%3B%22+aria-label%3D%22app+%283%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3Eapp%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3Dc%25e8%25af%25ad%25e8%25a8%2580%22+class%3D%22tag-cloud-link+tag-link-84+tag-link-position-2%22+style%3D%22font-size%3A+17.123595505618pt%3B%22+aria-label%3D%22C%E8%AF%AD%E8%A8%80+%2814%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3EC%E8%AF%AD%E8%A8%80%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3Dddos%22+class%3D%22tag-cloud-link+tag-link-51+tag-link-position-3%22+style%3D%22font-size%3A+9.5730337078652pt%3B%22+aria-label%3D%22Ddos+%284%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3EDdos%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3Dhttps%22+class%3D%22tag-cloud-link+tag-link-91+tag-link-position-4%22+style%3D%22font-size%3A+9.5730337078652pt%3B%22+aria-label%3D%22https+%284%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3Ehttps%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3Dlinux%22+class%3D%22tag-cloud-link+tag-link-17+tag-link-position-5%22+style%3D%22font-size%3A+14.292134831461pt%3B%22+aria-label%3D%22linux+%289%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3Elinux%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3Dlol%22+class%3D%22tag-cloud-link+tag-link-20+tag-link-position-6%22+style%3D%22font-size%3A+9.5730337078652pt%3B%22+aria-label%3D%22lol+%284%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3Elol%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3Dmiui%22+class%3D%22tag-cloud-link+tag-link-34+tag-link-position-7%22+style%3D%22font-size%3A+13.505617977528pt%3B%22+aria-label%3D%22MIUI+%288%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3EMIUI%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3Dmv%22+class%3D%22tag-cloud-link+tag-link-181+tag-link-position-8%22+style%3D%22font-size%3A+9.5730337078652pt%3B%22+aria-label%3D%22MV+%284%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3EMV%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3Dshell%22+class%3D%22tag-cloud-link+tag-link-59+tag-link-position-9%22+style%3D%22font-size%3A+8pt%3B%22+aria-label%3D%22Shell+%283%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3EShell%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3Dvultr%22+class%3D%22tag-cloud-link+tag-link-189+tag-link-position-10%22+style%3D%22font-size%3A+11.932584269663pt%3B%22+aria-label%3D%22vultr+%286%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3Evultr%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3Dwindows%22+class%3D%22tag-cloud-link+tag-link-53+tag-link-position-11%22+style%3D%22font-size%3A+9.5730337078652pt%3B%22+aria-label%3D%22Windows+%284%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3EWindows%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3Dwordpress%22+class%3D%22tag-cloud-link+tag-link-106+tag-link-position-12%22+style%3D%22font-size%3A+22pt%3B%22+aria-label%3D%22wordpress+%2830%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3Ewordpress%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e4%25b8%2593%25e8%25be%2591%22+class%3D%22tag-cloud-link+tag-link-220+tag-link-position-13%22+style%3D%22font-size%3A+8pt%3B%22+aria-label%3D%22%E4%B8%93%E8%BE%91+%283%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E4%B8%93%E8%BE%91%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e4%25b8%25bb%25e9%25a2%2598%22+class%3D%22tag-cloud-link+tag-link-226+tag-link-position-14%22+style%3D%22font-size%3A+16.022471910112pt%3B%22+aria-label%3D%22%E4%B8%BB%E9%A2%98+%2812%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E4%B8%BB%E9%A2%98%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e4%25b9%25a0%25e9%25a2%2598%25e8%25a7%25a3%25e7%25ad%2594%22+class%3D%22tag-cloud-link+tag-link-145+tag-link-position-15%22+style%3D%22font-size%3A+8pt%3B%22+aria-label%3D%22%E4%B9%A0%E9%A2%98%E8%A7%A3%E7%AD%94+%283%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E4%B9%A0%E9%A2%98%E8%A7%A3%E7%AD%94%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e4%25bb%25a3%25e7%25a0%2581%22+class%3D%22tag-cloud-link+tag-link-93+tag-link-position-16%22+style%3D%22font-size%3A+8pt%3B%22+aria-label%3D%22%E4%BB%A3%E7%A0%81+%283%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E4%BB%A3%E7%A0%81%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e4%25bb%25a3%25e7%25a0%2581%25e7%25ac%2594%25e8%25ae%25b0%22+class%3D%22tag-cloud-link+tag-link-146+tag-link-position-17%22+style%3D%22font-size%3A+9.5730337078652pt%3B%22+aria-label%3D%22%E4%BB%A3%E7%A0%81%E7%AC%94%E8%AE%B0+%284%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E4%BB%A3%E7%A0%81%E7%AC%94%E8%AE%B0%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e5%2585%258d%25e6%25b5%2581%22+class%3D%22tag-cloud-link+tag-link-29+tag-link-position-18%22+style%3D%22font-size%3A+10.831460674157pt%3B%22+aria-label%3D%22%E5%85%8D%E6%B5%81+%285%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E5%85%8D%E6%B5%81%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e5%2585%258d%25e8%25b4%25b9%22+class%3D%22tag-cloud-link+tag-link-179+tag-link-position-19%22+style%3D%22font-size%3A+11.932584269663pt%3B%22+aria-label%3D%22%E5%85%8D%E8%B4%B9+%286%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E5%85%8D%E8%B4%B9%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e5%258a%25a0%25e5%25af%2586%22+class%3D%22tag-cloud-link+tag-link-58+tag-link-position-20%22+style%3D%22font-size%3A+12.719101123596pt%3B%22+aria-label%3D%22%E5%8A%A0%E5%AF%86+%287%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E5%8A%A0%E5%AF%86%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e5%258a%25a0%25e9%2580%259f%22+class%3D%22tag-cloud-link+tag-link-27+tag-link-position-21%22+style%3D%22font-size%3A+9.5730337078652pt%3B%22+aria-label%3D%22%E5%8A%A0%E9%80%9F+%284%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E5%8A%A0%E9%80%9F%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e5%258a%25b1%25e5%25bf%2597%22+class%3D%22tag-cloud-link+tag-link-63+tag-link-position-22%22+style%3D%22font-size%3A+8pt%3B%22+aria-label%3D%22%E5%8A%B1%E5%BF%97+%283%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E5%8A%B1%E5%BF%97%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e5%259b%25be%25e7%2589%2587%22+class%3D%22tag-cloud-link+tag-link-244+tag-link-position-23%22+style%3D%22font-size%3A+8pt%3B%22+aria-label%3D%22%E5%9B%BE%E7%89%87+%283%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E5%9B%BE%E7%89%87%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e5%259c%25a8%25e7%25ba%25bf%22+class%3D%22tag-cloud-link+tag-link-70+tag-link-position-24%22+style%3D%22font-size%3A+9.5730337078652pt%3B%22+aria-label%3D%22%E5%9C%A8%E7%BA%BF+%284%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E5%9C%A8%E7%BA%BF%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e5%25ad%25a6%25e7%2594%259f%25e6%259c%25ba%22+class%3D%22tag-cloud-link+tag-link-202+tag-link-position-25%22+style%3D%22font-size%3A+10.831460674157pt%3B%22+aria-label%3D%22%E5%AD%A6%E7%94%9F%E6%9C%BA+%285%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E5%AD%A6%E7%94%9F%E6%9C%BA%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e5%25ae%2589%25e5%2585%25a8%22+class%3D%22tag-cloud-link+tag-link-90+tag-link-position-26%22+style%3D%22font-size%3A+16.651685393258pt%3B%22+aria-label%3D%22%E5%AE%89%E5%85%A8+%2813%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E5%AE%89%E5%85%A8%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e5%25b7%25a5%25e5%2585%25b7%22+class%3D%22tag-cloud-link+tag-link-52+tag-link-position-27%22+style%3D%22font-size%3A+9.5730337078652pt%3B%22+aria-label%3D%22%E5%B7%A5%E5%85%B7+%284%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E5%B7%A5%E5%85%B7%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e5%25bb%25ba%25e7%25ab%2599%22+class%3D%22tag-cloud-link+tag-link-85+tag-link-position-28%22+style%3D%22font-size%3A+11.932584269663pt%3B%22+aria-label%3D%22%E5%BB%BA%E7%AB%99+%286%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E5%BB%BA%E7%AB%99%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e6%2582%25ac%25e7%2596%2591%22+class%3D%22tag-cloud-link+tag-link-111+tag-link-position-29%22+style%3D%22font-size%3A+10.831460674157pt%3B%22+aria-label%3D%22%E6%82%AC%E7%96%91+%285%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E6%82%AC%E7%96%91%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e6%258f%2592%25e4%25bb%25b6%22+class%3D%22tag-cloud-link+tag-link-171+tag-link-position-30%22+style%3D%22font-size%3A+9.5730337078652pt%3B%22+aria-label%3D%22%E6%8F%92%E4%BB%B6+%284%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E6%8F%92%E4%BB%B6%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e6%2595%2599%25e7%25a8%258b%22+class%3D%22tag-cloud-link+tag-link-37+tag-link-position-31%22+style%3D%22font-size%3A+15.550561797753pt%3B%22+aria-label%3D%22%E6%95%99%E7%A8%8B+%2811%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E6%95%99%E7%A8%8B%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e6%259c%258d%25e5%258a%25a1%25e5%2599%25a8%22+class%3D%22tag-cloud-link+tag-link-57+tag-link-position-32%22+style%3D%22font-size%3A+14.292134831461pt%3B%22+aria-label%3D%22%E6%9C%8D%E5%8A%A1%E5%99%A8+%289%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E6%9C%8D%E5%8A%A1%E5%99%A8%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e6%259e%2581%25e7%25ae%2580%22+class%3D%22tag-cloud-link+tag-link-216+tag-link-position-33%22+style%3D%22font-size%3A+8pt%3B%22+aria-label%3D%22%E6%9E%81%E7%AE%80+%283%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E6%9E%81%E7%AE%80%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e7%2594%25b5%25e5%25bd%25b1%22+class%3D%22tag-cloud-link+tag-link-61+tag-link-position-34%22+style%3D%22font-size%3A+14.292134831461pt%3B%22+aria-label%3D%22%E7%94%B5%E5%BD%B1+%289%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E7%94%B5%E5%BD%B1%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e7%2599%25be%25e5%25ba%25a6%25e4%25ba%2591%22+class%3D%22tag-cloud-link+tag-link-24+tag-link-position-35%22+style%3D%22font-size%3A+9.5730337078652pt%3B%22+aria-label%3D%22%E7%99%BE%E5%BA%A6%E4%BA%91+%284%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E7%99%BE%E5%BA%A6%E4%BA%91%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e7%25a0%25b4%25e8%25a7%25a3%22+class%3D%22tag-cloud-link+tag-link-26+tag-link-position-36%22+style%3D%22font-size%3A+17.438202247191pt%3B%22+aria-label%3D%22%E7%A0%B4%E8%A7%A3+%2815%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E7%A0%B4%E8%A7%A3%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e7%25ae%2580%25e7%25ba%25a6%22+class%3D%22tag-cloud-link+tag-link-217+tag-link-position-37%22+style%3D%22font-size%3A+9.5730337078652pt%3B%22+aria-label%3D%22%E7%AE%80%E7%BA%A6+%284%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E7%AE%80%E7%BA%A6%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e7%25bd%2591%25e7%25ab%2599%22+class%3D%22tag-cloud-link+tag-link-80+tag-link-position-38%22+style%3D%22font-size%3A+9.5730337078652pt%3B%22+aria-label%3D%22%E7%BD%91%E7%AB%99+%284%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E7%BD%91%E7%AB%99%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e7%25be%258e%25e5%258c%2596%22+class%3D%22tag-cloud-link+tag-link-134+tag-link-position-39%22+style%3D%22font-size%3A+12.719101123596pt%3B%22+aria-label%3D%22%E7%BE%8E%E5%8C%96+%287%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E7%BE%8E%E5%8C%96%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e8%2584%259a%25e6%259c%25ac%22+class%3D%22tag-cloud-link+tag-link-31+tag-link-position-40%22+style%3D%22font-size%3A+14.292134831461pt%3B%22+aria-label%3D%22%E8%84%9A%E6%9C%AC+%289%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E8%84%9A%E6%9C%AC%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e8%2585%25be%25e8%25ae%25af%25e4%25ba%2591%22+class%3D%22tag-cloud-link+tag-link-86+tag-link-position-41%22+style%3D%22font-size%3A+13.505617977528pt%3B%22+aria-label%3D%22%E8%85%BE%E8%AE%AF%E4%BA%91+%288%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E8%85%BE%E8%AE%AF%E4%BA%91%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e8%2593%259d%25e6%25a1%25a5%25e6%259d%25af%22+class%3D%22tag-cloud-link+tag-link-49+tag-link-position-42%22+style%3D%22font-size%3A+15.550561797753pt%3B%22+aria-label%3D%22%E8%93%9D%E6%A1%A5%E6%9D%AF+%2811%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E8%93%9D%E6%A1%A5%E6%9D%AF%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e8%25a7%25a3%25e5%25af%2586%22+class%3D%22tag-cloud-link+tag-link-75+tag-link-position-43%22+style%3D%22font-size%3A+8pt%3B%22+aria-label%3D%22%E8%A7%A3%E5%AF%86+%283%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E8%A7%A3%E5%AF%86%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e8%25b5%2584%25e6%25ba%2590%22+class%3D%22tag-cloud-link+tag-link-25+tag-link-position-44%22+style%3D%22font-size%3A+12.719101123596pt%3B%22+aria-label%3D%22%E8%B5%84%E6%BA%90+%287%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E8%B5%84%E6%BA%90%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e9%259f%25b3%25e4%25b9%2590%22+class%3D%22tag-cloud-link+tag-link-46+tag-link-position-45%22+style%3D%22font-size%3A+9.5730337078652pt%3B%22+aria-label%3D%22%E9%9F%B3%E4%B9%90+%284%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E9%9F%B3%E4%B9%90%3C%2Fa%3E%3C%2Ftags%3E">
+    </div>
+    <script type="text/javascript">
+        var widget_so1616102 = new SWFObject("https://www.qcgzxw.cn/wp-content/plugins/wp-cumulus/tagcloud.swf?r=7023167", "tagcloudflash", "300", "300", "9", "#ffffff"); widget_so1616102.addParam("wmode", "transparent"); widget_so1616102.addParam("allowScriptAccess", "always"); widget_so1616102.addVariable("tcolor", "0x333333"); widget_so1616102.addVariable("tcolor2", "0x333666"); widget_so1616102.addVariable("hicolor", "0x000000"); widget_so1616102.addVariable("tspeed", "150"); widget_so1616102.addVariable("distr", "true"); widget_so1616102.addVariable("mode", "tags"); widget_so1616102.addVariable("tagcloud", "%3Ctags%3E%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3Dapp%22+class%3D%22tag-cloud-link+tag-link-45+tag-link-position-1%22+style%3D%22font-size%3A+8pt%3B%22+aria-label%3D%22app+%283%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3Eapp%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3Dc%25e8%25af%25ad%25e8%25a8%2580%22+class%3D%22tag-cloud-link+tag-link-84+tag-link-position-2%22+style%3D%22font-size%3A+17.123595505618pt%3B%22+aria-label%3D%22C%E8%AF%AD%E8%A8%80+%2814%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3EC%E8%AF%AD%E8%A8%80%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3Dddos%22+class%3D%22tag-cloud-link+tag-link-51+tag-link-position-3%22+style%3D%22font-size%3A+9.5730337078652pt%3B%22+aria-label%3D%22Ddos+%284%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3EDdos%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3Dhttps%22+class%3D%22tag-cloud-link+tag-link-91+tag-link-position-4%22+style%3D%22font-size%3A+9.5730337078652pt%3B%22+aria-label%3D%22https+%284%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3Ehttps%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3Dlinux%22+class%3D%22tag-cloud-link+tag-link-17+tag-link-position-5%22+style%3D%22font-size%3A+14.292134831461pt%3B%22+aria-label%3D%22linux+%289%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3Elinux%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3Dlol%22+class%3D%22tag-cloud-link+tag-link-20+tag-link-position-6%22+style%3D%22font-size%3A+9.5730337078652pt%3B%22+aria-label%3D%22lol+%284%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3Elol%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3Dmiui%22+class%3D%22tag-cloud-link+tag-link-34+tag-link-position-7%22+style%3D%22font-size%3A+13.505617977528pt%3B%22+aria-label%3D%22MIUI+%288%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3EMIUI%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3Dmv%22+class%3D%22tag-cloud-link+tag-link-181+tag-link-position-8%22+style%3D%22font-size%3A+9.5730337078652pt%3B%22+aria-label%3D%22MV+%284%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3EMV%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3Dshell%22+class%3D%22tag-cloud-link+tag-link-59+tag-link-position-9%22+style%3D%22font-size%3A+8pt%3B%22+aria-label%3D%22Shell+%283%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3EShell%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3Dvultr%22+class%3D%22tag-cloud-link+tag-link-189+tag-link-position-10%22+style%3D%22font-size%3A+11.932584269663pt%3B%22+aria-label%3D%22vultr+%286%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3Evultr%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3Dwindows%22+class%3D%22tag-cloud-link+tag-link-53+tag-link-position-11%22+style%3D%22font-size%3A+9.5730337078652pt%3B%22+aria-label%3D%22Windows+%284%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3EWindows%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3Dwordpress%22+class%3D%22tag-cloud-link+tag-link-106+tag-link-position-12%22+style%3D%22font-size%3A+22pt%3B%22+aria-label%3D%22wordpress+%2830%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3Ewordpress%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e4%25b8%2593%25e8%25be%2591%22+class%3D%22tag-cloud-link+tag-link-220+tag-link-position-13%22+style%3D%22font-size%3A+8pt%3B%22+aria-label%3D%22%E4%B8%93%E8%BE%91+%283%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E4%B8%93%E8%BE%91%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e4%25b8%25bb%25e9%25a2%2598%22+class%3D%22tag-cloud-link+tag-link-226+tag-link-position-14%22+style%3D%22font-size%3A+16.022471910112pt%3B%22+aria-label%3D%22%E4%B8%BB%E9%A2%98+%2812%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E4%B8%BB%E9%A2%98%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e4%25b9%25a0%25e9%25a2%2598%25e8%25a7%25a3%25e7%25ad%2594%22+class%3D%22tag-cloud-link+tag-link-145+tag-link-position-15%22+style%3D%22font-size%3A+8pt%3B%22+aria-label%3D%22%E4%B9%A0%E9%A2%98%E8%A7%A3%E7%AD%94+%283%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E4%B9%A0%E9%A2%98%E8%A7%A3%E7%AD%94%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e4%25bb%25a3%25e7%25a0%2581%22+class%3D%22tag-cloud-link+tag-link-93+tag-link-position-16%22+style%3D%22font-size%3A+8pt%3B%22+aria-label%3D%22%E4%BB%A3%E7%A0%81+%283%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E4%BB%A3%E7%A0%81%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e4%25bb%25a3%25e7%25a0%2581%25e7%25ac%2594%25e8%25ae%25b0%22+class%3D%22tag-cloud-link+tag-link-146+tag-link-position-17%22+style%3D%22font-size%3A+9.5730337078652pt%3B%22+aria-label%3D%22%E4%BB%A3%E7%A0%81%E7%AC%94%E8%AE%B0+%284%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E4%BB%A3%E7%A0%81%E7%AC%94%E8%AE%B0%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e5%2585%258d%25e6%25b5%2581%22+class%3D%22tag-cloud-link+tag-link-29+tag-link-position-18%22+style%3D%22font-size%3A+10.831460674157pt%3B%22+aria-label%3D%22%E5%85%8D%E6%B5%81+%285%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E5%85%8D%E6%B5%81%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e5%2585%258d%25e8%25b4%25b9%22+class%3D%22tag-cloud-link+tag-link-179+tag-link-position-19%22+style%3D%22font-size%3A+11.932584269663pt%3B%22+aria-label%3D%22%E5%85%8D%E8%B4%B9+%286%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E5%85%8D%E8%B4%B9%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e5%258a%25a0%25e5%25af%2586%22+class%3D%22tag-cloud-link+tag-link-58+tag-link-position-20%22+style%3D%22font-size%3A+12.719101123596pt%3B%22+aria-label%3D%22%E5%8A%A0%E5%AF%86+%287%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E5%8A%A0%E5%AF%86%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e5%258a%25a0%25e9%2580%259f%22+class%3D%22tag-cloud-link+tag-link-27+tag-link-position-21%22+style%3D%22font-size%3A+9.5730337078652pt%3B%22+aria-label%3D%22%E5%8A%A0%E9%80%9F+%284%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E5%8A%A0%E9%80%9F%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e5%258a%25b1%25e5%25bf%2597%22+class%3D%22tag-cloud-link+tag-link-63+tag-link-position-22%22+style%3D%22font-size%3A+8pt%3B%22+aria-label%3D%22%E5%8A%B1%E5%BF%97+%283%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E5%8A%B1%E5%BF%97%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e5%259b%25be%25e7%2589%2587%22+class%3D%22tag-cloud-link+tag-link-244+tag-link-position-23%22+style%3D%22font-size%3A+8pt%3B%22+aria-label%3D%22%E5%9B%BE%E7%89%87+%283%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E5%9B%BE%E7%89%87%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e5%259c%25a8%25e7%25ba%25bf%22+class%3D%22tag-cloud-link+tag-link-70+tag-link-position-24%22+style%3D%22font-size%3A+9.5730337078652pt%3B%22+aria-label%3D%22%E5%9C%A8%E7%BA%BF+%284%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E5%9C%A8%E7%BA%BF%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e5%25ad%25a6%25e7%2594%259f%25e6%259c%25ba%22+class%3D%22tag-cloud-link+tag-link-202+tag-link-position-25%22+style%3D%22font-size%3A+10.831460674157pt%3B%22+aria-label%3D%22%E5%AD%A6%E7%94%9F%E6%9C%BA+%285%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E5%AD%A6%E7%94%9F%E6%9C%BA%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e5%25ae%2589%25e5%2585%25a8%22+class%3D%22tag-cloud-link+tag-link-90+tag-link-position-26%22+style%3D%22font-size%3A+16.651685393258pt%3B%22+aria-label%3D%22%E5%AE%89%E5%85%A8+%2813%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E5%AE%89%E5%85%A8%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e5%25b7%25a5%25e5%2585%25b7%22+class%3D%22tag-cloud-link+tag-link-52+tag-link-position-27%22+style%3D%22font-size%3A+9.5730337078652pt%3B%22+aria-label%3D%22%E5%B7%A5%E5%85%B7+%284%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E5%B7%A5%E5%85%B7%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e5%25bb%25ba%25e7%25ab%2599%22+class%3D%22tag-cloud-link+tag-link-85+tag-link-position-28%22+style%3D%22font-size%3A+11.932584269663pt%3B%22+aria-label%3D%22%E5%BB%BA%E7%AB%99+%286%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E5%BB%BA%E7%AB%99%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e6%2582%25ac%25e7%2596%2591%22+class%3D%22tag-cloud-link+tag-link-111+tag-link-position-29%22+style%3D%22font-size%3A+10.831460674157pt%3B%22+aria-label%3D%22%E6%82%AC%E7%96%91+%285%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E6%82%AC%E7%96%91%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e6%258f%2592%25e4%25bb%25b6%22+class%3D%22tag-cloud-link+tag-link-171+tag-link-position-30%22+style%3D%22font-size%3A+9.5730337078652pt%3B%22+aria-label%3D%22%E6%8F%92%E4%BB%B6+%284%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E6%8F%92%E4%BB%B6%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e6%2595%2599%25e7%25a8%258b%22+class%3D%22tag-cloud-link+tag-link-37+tag-link-position-31%22+style%3D%22font-size%3A+15.550561797753pt%3B%22+aria-label%3D%22%E6%95%99%E7%A8%8B+%2811%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E6%95%99%E7%A8%8B%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e6%259c%258d%25e5%258a%25a1%25e5%2599%25a8%22+class%3D%22tag-cloud-link+tag-link-57+tag-link-position-32%22+style%3D%22font-size%3A+14.292134831461pt%3B%22+aria-label%3D%22%E6%9C%8D%E5%8A%A1%E5%99%A8+%289%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E6%9C%8D%E5%8A%A1%E5%99%A8%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e6%259e%2581%25e7%25ae%2580%22+class%3D%22tag-cloud-link+tag-link-216+tag-link-position-33%22+style%3D%22font-size%3A+8pt%3B%22+aria-label%3D%22%E6%9E%81%E7%AE%80+%283%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E6%9E%81%E7%AE%80%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e7%2594%25b5%25e5%25bd%25b1%22+class%3D%22tag-cloud-link+tag-link-61+tag-link-position-34%22+style%3D%22font-size%3A+14.292134831461pt%3B%22+aria-label%3D%22%E7%94%B5%E5%BD%B1+%289%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E7%94%B5%E5%BD%B1%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e7%2599%25be%25e5%25ba%25a6%25e4%25ba%2591%22+class%3D%22tag-cloud-link+tag-link-24+tag-link-position-35%22+style%3D%22font-size%3A+9.5730337078652pt%3B%22+aria-label%3D%22%E7%99%BE%E5%BA%A6%E4%BA%91+%284%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E7%99%BE%E5%BA%A6%E4%BA%91%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e7%25a0%25b4%25e8%25a7%25a3%22+class%3D%22tag-cloud-link+tag-link-26+tag-link-position-36%22+style%3D%22font-size%3A+17.438202247191pt%3B%22+aria-label%3D%22%E7%A0%B4%E8%A7%A3+%2815%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E7%A0%B4%E8%A7%A3%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e7%25ae%2580%25e7%25ba%25a6%22+class%3D%22tag-cloud-link+tag-link-217+tag-link-position-37%22+style%3D%22font-size%3A+9.5730337078652pt%3B%22+aria-label%3D%22%E7%AE%80%E7%BA%A6+%284%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E7%AE%80%E7%BA%A6%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e7%25bd%2591%25e7%25ab%2599%22+class%3D%22tag-cloud-link+tag-link-80+tag-link-position-38%22+style%3D%22font-size%3A+9.5730337078652pt%3B%22+aria-label%3D%22%E7%BD%91%E7%AB%99+%284%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E7%BD%91%E7%AB%99%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e7%25be%258e%25e5%258c%2596%22+class%3D%22tag-cloud-link+tag-link-134+tag-link-position-39%22+style%3D%22font-size%3A+12.719101123596pt%3B%22+aria-label%3D%22%E7%BE%8E%E5%8C%96+%287%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E7%BE%8E%E5%8C%96%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e8%2584%259a%25e6%259c%25ac%22+class%3D%22tag-cloud-link+tag-link-31+tag-link-position-40%22+style%3D%22font-size%3A+14.292134831461pt%3B%22+aria-label%3D%22%E8%84%9A%E6%9C%AC+%289%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E8%84%9A%E6%9C%AC%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e8%2585%25be%25e8%25ae%25af%25e4%25ba%2591%22+class%3D%22tag-cloud-link+tag-link-86+tag-link-position-41%22+style%3D%22font-size%3A+13.505617977528pt%3B%22+aria-label%3D%22%E8%85%BE%E8%AE%AF%E4%BA%91+%288%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E8%85%BE%E8%AE%AF%E4%BA%91%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e8%2593%259d%25e6%25a1%25a5%25e6%259d%25af%22+class%3D%22tag-cloud-link+tag-link-49+tag-link-position-42%22+style%3D%22font-size%3A+15.550561797753pt%3B%22+aria-label%3D%22%E8%93%9D%E6%A1%A5%E6%9D%AF+%2811%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E8%93%9D%E6%A1%A5%E6%9D%AF%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e8%25a7%25a3%25e5%25af%2586%22+class%3D%22tag-cloud-link+tag-link-75+tag-link-position-43%22+style%3D%22font-size%3A+8pt%3B%22+aria-label%3D%22%E8%A7%A3%E5%AF%86+%283%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E8%A7%A3%E5%AF%86%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e8%25b5%2584%25e6%25ba%2590%22+class%3D%22tag-cloud-link+tag-link-25+tag-link-position-44%22+style%3D%22font-size%3A+12.719101123596pt%3B%22+aria-label%3D%22%E8%B5%84%E6%BA%90+%287%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E8%B5%84%E6%BA%90%3C%2Fa%3E%0A%3Ca+href%3D%22https%3A%2F%2Fwww.qcgzxw.cn%2F%3Ftag%3D%25e9%259f%25b3%25e4%25b9%2590%22+class%3D%22tag-cloud-link+tag-link-46+tag-link-position-45%22+style%3D%22font-size%3A+9.5730337078652pt%3B%22+aria-label%3D%22%E9%9F%B3%E4%B9%90+%284%E4%B8%AA%E9%A1%B9%E7%9B%AE%29%22%3E%E9%9F%B3%E4%B9%90%3C%2Fa%3E%3C%2Ftags%3E"); widget_so1616102.write("wpcumuluswidgetcontent5337143");
+    </script>
+</section>
+
+
+
+
+<script>
+    var newid = $(".Newsid").val();
+
+    $(".dianzan").click(function () {
+        $.post("@Url.Action("Adddianzan","Post")", { NewsID: newid });
+        //方法执行完后加载页面
+        location.reload();
+    })
+
+    $(".fabiao").click(function () {
+
+        //alert($("#author").val());
+
+        //alert($("#email").val());
+
+        //alert($("#comment").val());
+
+        var comment = $("#comment").val();
+
+        var email = $("#email").val();
+
+        var author = $("#author").val();
+
+        $.post("@Url.Action("AddReview","Post")", { NewsID: newid, ReviewContent: comment, ReviewName: author, Email: email }, function (data) {
+            if (data = "ok")
+            {
+                //方法执行完后加载页面
+                location.reload();
+            }
+        });
+    })
+
+</script>

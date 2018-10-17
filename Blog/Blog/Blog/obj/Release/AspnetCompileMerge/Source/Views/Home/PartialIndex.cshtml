@@ -1,0 +1,55 @@
+﻿@using Blog.DAL;
+
+@foreach (var item in ViewBag.GetList)
+{
+    <section class="card azkaban-block clearfix">
+        <div class="azkaban-article clearfix">
+            <div class="azkaban-article-thumb">
+                <a href="@Url.Action("PostDetails", "Post", new { NewsID = item[0] })">
+                    <img class="img-thumbnail" src=" @News_ContentDao.GetDetailsPic(int.Parse(item[0])) " alt=" @item[1] ">
+                </a>
+            </div>
+            <div class="azkaban-article-inner">
+                <header class="azkaban-article-header">
+
+                    <h2 class="azkaban-article-title">
+                        <a class="text-dark" href="@Url.Action("PostDetails", "Post", new { NewsID = item[0] })">
+                            @item[1]
+                        </a>
+                    </h2>
+                </header>
+                <div class="azkaban-article-content">
+                    <p>
+                        @News_ContentDao.GetDetailsText(int.Parse(item[0]))
+                    </p>
+                </div>
+            </div>
+            <div class="azkaban-article-meta">
+                <span class="visible-lg visible-md visible-sm pull-left">
+                    <a href="@Url.Action("PostDetails", "Post", new { NewsID = item[0] })">
+                        <img src="~/Content/tubiao/%e6%97%a5%e6%9c%9f.bmp" style="width:20px;height:20px;" />
+                        @DateTime.Parse(item[2].ToString()).ToLongDateString()
+                    </a>
+                    <a class="ml-2" href="@Url.Action("PostDetails", "Post", new { NewsID = item[0] })">
+                        <img src="~/Content/tubiao/%e8%af%84%e8%ae%ba.bmp" style="width:20px;height:20px;" />
+                        @News_ContentDao.GetReviewCount(int.Parse(item[0].ToString()))<span>条评论</span>
+                    </a>
+                </span>
+                <span class="pull-left">
+                    <a class="ml-2" href="@Url.Action("PostDetails", "Post", new { NewsID = item[0] })">
+                        <img src="~/Content/tubiao/%e7%82%b9%e8%b5%9e.bmp" style="width:20px;height:20px;" />
+                        @News_ContentDao.Getdianzai(int.Parse(item[0])) <span>人点赞</span>
+                    </a>
+
+                </span>
+                <span class="pull-right">
+                    <img src="~/Content/tubiao/%e9%98%85%e8%af%bb.bmp" style="width:20px;height:20px;" />
+                    <a href="@Url.Action("PostDetails", "Post", new { NewsID = item[0] })">
+                        阅读全文
+
+                    </a>
+                </span>
+            </div>
+        </div>
+    </section>
+}

@@ -1,0 +1,59 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>最美网</title>
+    <meta name="renderer" content="webkit" />
+    <meta name="renderer" content="ie-comp" />
+    <meta name="renderer" content="ie-stand" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="js/util.js" type="text/javascript"></script>
+    <script src="js/layer/layer.min.js"></script>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <iframe src="index.aspx" frameborder="0" marginheight="0" marginwidth="0" scrolling="no" width="100%" style="border:none" id="if1"></iframe>
+    <input id="input_main" type="hidden" value="cds" />
+</body>
+<script>
+   
+    var act = getpara("act");
+    if (act == "login" || act == "") {
+        $("#if1").attr("src", "Login.aspx");
+    }
+    changeH();
+    function changeH() {
+        var h = $(window).height();
+        $("iframe").attr("height", h + "px");
+    }
+    window.onresize = function () {
+        changeH();
+    };
+
+   
+
+
+    //判断浏览器是否支持后台
+    (function () {
+        var TestFormData = null;
+        try {
+            TestFormData = new FormData();
+            TestFormData.append("suppert_browers", "yes");
+            $("body").css("display", "");
+        } catch (e) {
+            if (e.toString() == "ReferenceError: “FormData”未定义") {
+
+            }
+            $("body").css("display", "");
+            layer.msg("当前浏览器版本过低，请选择更高级别的浏览器进行访问！<br/>", { title: '错误提示', shade: [1.0, '#000'], icon: 2, time: 0 });
+        }
+    })();
+
+</script>
+</html>

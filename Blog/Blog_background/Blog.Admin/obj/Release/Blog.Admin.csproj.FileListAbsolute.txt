@@ -1,0 +1,14 @@
+E:\C#2013\XiangMu\MVC4\Blog_background\Blog.Admin\bin\Blog.Admin.dll.config
+E:\C#2013\XiangMu\MVC4\Blog_background\Blog.Admin\bin\Blog.Admin.dll
+E:\C#2013\XiangMu\MVC4\Blog_background\Blog.Admin\bin\Blog.Admin.pdb
+E:\C#2013\XiangMu\MVC4\Blog_background\Blog.Admin\bin\Aliyun.OSS.dll
+E:\C#2013\XiangMu\MVC4\Blog_background\Blog.Admin\bin\Blog.Common.dll
+E:\C#2013\XiangMu\MVC4\Blog_background\Blog.Admin\bin\Blog.DAL.dll
+E:\C#2013\XiangMu\MVC4\Blog_background\Blog.Admin\bin\Blog.Model.dll
+E:\C#2013\XiangMu\MVC4\Blog_background\Blog.Admin\bin\Newtonsoft.Json.dll
+E:\C#2013\XiangMu\MVC4\Blog_background\Blog.Admin\bin\Blog.Common.pdb
+E:\C#2013\XiangMu\MVC4\Blog_background\Blog.Admin\bin\Blog.DAL.pdb
+E:\C#2013\XiangMu\MVC4\Blog_background\Blog.Admin\bin\Blog.Model.pdb
+E:\C#2013\XiangMu\MVC4\Blog_background\Blog.Admin\obj\Release\Blog.Admin.dll
+E:\C#2013\XiangMu\MVC4\Blog_background\Blog.Admin\obj\Release\Blog.Admin.pdb
+E:\C#2013\XiangMu\MVC4\Blog_background\Blog.Admin\obj\Release\Blog.Admin.csprojResolveAssemblyReference.cache

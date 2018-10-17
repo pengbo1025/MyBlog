@@ -1,0 +1,850 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E0D0644B-F43A-4187-90FC-05520D7AEA6C}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Blog.Admin</RootNamespace>
+    <AssemblyName>Blog.Admin</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Aliyun.OSS">
+      <HintPath>..\..\..\..\..\最美相关文档及后台搭建框架\zuimei\zuimei.Admin\bin\Aliyun.OSS.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\pb\Desktop\框架和代码生成器\项目环境搭建资源\bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\bootstrap-colorpicker\css\vssver2.scc" />
+    <Content Include="assets\bootstrap-colorpicker\img\vssver2.scc" />
+    <Content Include="assets\bootstrap-colorpicker\js\vssver2.scc" />
+    <Content Include="assets\bootstrap-datepicker\css\vssver2.scc" />
+    <Content Include="assets\bootstrap-datepicker\js\vssver2.scc" />
+    <Content Include="assets\bootstrap-daterangepicker\vssver2.scc" />
+    <Content Include="assets\bootstrap-inputmask\vssver2.scc" />
+    <Content Include="assets\bootstrap-timepicker\compiled\vssver2.scc" />
+    <Content Include="assets\bootstrap-timepicker\js\vssver2.scc" />
+    <Content Include="assets\bootstrap-toggle-buttons\static\js\vssver2.scc" />
+    <Content Include="assets\bootstrap-toggle-buttons\static\stylesheets\vssver2.scc" />
+    <Content Include="assets\bootstrap-tree\bootstrap-tree\css\vssver2.scc" />
+    <Content Include="assets\bootstrap-tree\bootstrap-tree\img\vssver2.scc" />
+    <Content Include="assets\bootstrap-tree\bootstrap-tree\js\vssver2.scc" />
+    <Content Include="assets\bootstrap-wizard\vssver2.scc" />
+    <Content Include="assets\bootstrap-wysihtml5\vssver2.scc" />
+    <Content Include="assets\bootstrap\css\vssver2.scc" />
+    <Content Include="assets\bootstrap\img\vssver2.scc" />
+    <Content Include="assets\bootstrap\js\vssver2.scc" />
+    <Content Include="assets\chart-master\vssver2.scc" />
+    <Content Include="assets\chosen-bootstrap\chosen\vssver2.scc" />
+    <Content Include="assets\ckeditor\vssver2.scc" />
+    <Content Include="assets\clockface\css\vssver2.scc" />
+    <Content Include="assets\clockface\js\vssver2.scc" />
+    <Content Include="assets\data-tables\images\vssver2.scc" />
+    <Content Include="assets\data-tables\vssver2.scc" />
+    <Content Include="assets\dropzone\css\vssver2.scc" />
+    <Content Include="assets\dropzone\images\vssver2.scc" />
+    <Content Include="assets\dropzone\vssver2.scc" />
+    <Content Include="assets\fancybox\source\vssver2.scc" />
+    <Content Include="assets\flot\vssver2.scc" />
+    <Content Include="assets\font-awesome\css\vssver2.scc" />
+    <Content Include="assets\font-awesome\font\fontawesome-webfont.eot" />
+    <Content Include="assets\font-awesome\font\fontawesome-webfont.ttf" />
+    <Content Include="assets\font-awesome\font\fontawesome-webfont.woff" />
+    <Content Include="assets\font-awesome\font\FontAwesome.otf" />
+    <Content Include="assets\font-awesome\font\vssver2.scc" />
+    <Content Include="assets\fullcalendar\fullcalendar\vssver2.scc" />
+    <Content Include="assets\gritter\css\vssver2.scc" />
+    <Content Include="assets\gritter\images\vssver2.scc" />
+    <Content Include="assets\gritter\js\vssver2.scc" />
+    <Content Include="assets\jquery-easy-pie-chart\vssver2.scc" />
+    <Content Include="assets\jquery-slimscroll\vssver2.scc" />
+    <Content Include="assets\jquery-tags-input\vssver2.scc" />
+    <Content Include="assets\jquery-ui\images\vssver2.scc" />
+    <Content Include="assets\jquery-ui\vssver2.scc" />
+    <Content Include="assets\jqvmap\jqvmap\data\vssver2.scc" />
+    <Content Include="assets\jqvmap\jqvmap\maps\vssver2.scc" />
+    <Content Include="assets\jqvmap\jqvmap\vssver2.scc" />
+    <Content Include="assets\metr-folio\assets\tiles\vssver2.scc" />
+    <Content Include="assets\metr-folio\assets\vssver2.scc" />
+    <Content Include="assets\metr-folio\css\vssver2.scc" />
+    <Content Include="assets\metr-folio\icons\vssver2.scc" />
+    <Content Include="assets\metr-folio\js\vssver2.scc" />
+    <Content Include="assets\nestable\vssver2.scc" />
+    <Content Include="assets\uniform\css\vssver2.scc" />
+    <Content Include="assets\uniform\images\vssver2.scc" />
+    <Content Include="assets\uniform\vssver2.scc" />
+    <Content Include="css\divUpload\vssver2.scc" />
+    <Content Include="css\vssver2.scc" />
+    <Content Include="img\about-us\Thumbs.db" />
+    <Content Include="img\about-us\vssver2.scc" />
+    <Content Include="img\blog\Thumbs.db" />
+    <Content Include="img\blog\vssver2.scc" />
+    <Content Include="img\file-search\Thumbs.db" />
+    <Content Include="img\file-search\vssver2.scc" />
+    <Content Include="img\gallery\Thumbs.db" />
+    <Content Include="img\gallery\vssver2.scc" />
+    <Content Include="img\paytype\Thumbs.db" />
+    <Content Include="img\paytype\vssver2.scc" />
+    <Content Include="img\Thumbs.db" />
+    <Content Include="img\vssver2.scc" />
+    <Content Include="js\citys\vssver2.scc" />
+    <Content Include="js\date97\lang\vssver2.scc" />
+    <Content Include="js\date97\my97\lang\vssver2.scc" />
+    <Content Include="js\date97\my97\skin\default.rar" />
+    <Content Include="js\date97\my97\skin\default\vssver2.scc" />
+    <Content Include="js\date97\my97\skin\twoer\vssver2.scc" />
+    <Content Include="js\date97\my97\skin\vssver2.scc" />
+    <Content Include="js\date97\my97\skin\whyGreen\vssver2.scc" />
+    <Content Include="js\date97\my97\vssver2.scc" />
+    <Content Include="js\date97\skin\default\vssver2.scc" />
+    <Content Include="js\date97\skin\vssver2.scc" />
+    <Content Include="js\date97\vssver2.scc" />
+    <Content Include="js\diyUpload\vssver2.scc" />
+    <Content Include="js\highcharts\theme\vssver2.scc" />
+    <Content Include="js\highcharts\vssver2.scc" />
+    <Content Include="js\jquery-1.8.3.min.rar" />
+    <Content Include="js\kindeditor\asp.net\bin\vssver2.scc" />
+    <Content Include="js\kindeditor\asp.net\file_manager_json.ashx" />
+    <Content Include="js\kindeditor\asp.net\upload_json.ashx" />
+    <Content Include="js\kindeditor\asp.net\vssver2.scc" />
+    <Content Include="js\kindeditor\attached\image\20150809\vssver2.scc" />
+    <Content Include="js\kindeditor\attached\image\20150819\vssver2.scc" />
+    <Content Include="js\kindeditor\attached\image\20151205\vssver2.scc" />
+    <Content Include="js\kindeditor\attached\image\20151209\vssver2.scc" />
+    <Content Include="js\kindeditor\attached\image\20151215\vssver2.scc" />
+    <Content Include="js\kindeditor\lang\vssver2.scc" />
+    <Content Include="js\kindeditor\plugins\anchor\vssver2.scc" />
+    <Content Include="js\kindeditor\plugins\autoheight\vssver2.scc" />
+    <Content Include="js\kindeditor\plugins\baidumap\vssver2.scc" />
+    <Content Include="js\kindeditor\plugins\clearhtml\vssver2.scc" />
+    <Content Include="js\kindeditor\plugins\code\vssver2.scc" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\Thumbs.db" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\vssver2.scc" />
+    <Content Include="js\kindeditor\plugins\emoticons\vssver2.scc" />
+    <Content Include="js\kindeditor\plugins\filemanager\images\vssver2.scc" />
+    <Content Include="js\kindeditor\plugins\filemanager\vssver2.scc" />
+    <Content Include="js\kindeditor\plugins\flash\vssver2.scc" />
+    <Content Include="js\kindeditor\plugins\image\images\vssver2.scc" />
+    <Content Include="js\kindeditor\plugins\image\vssver2.scc" />
+    <Content Include="js\kindeditor\plugins\insertfile\vssver2.scc" />
+    <Content Include="js\kindeditor\plugins\lineheight\vssver2.scc" />
+    <Content Include="js\kindeditor\plugins\link\vssver2.scc" />
+    <Content Include="js\kindeditor\plugins\map\vssver2.scc" />
+    <Content Include="js\kindeditor\plugins\media\vssver2.scc" />
+    <Content Include="js\kindeditor\plugins\multiimage\images\vssver2.scc" />
+    <Content Include="js\kindeditor\plugins\multiimage\vssver2.scc" />
+    <Content Include="js\kindeditor\plugins\pagebreak\vssver2.scc" />
+    <Content Include="js\kindeditor\plugins\plainpaste\vssver2.scc" />
+    <Content Include="js\kindeditor\plugins\preview\vssver2.scc" />
+    <Content Include="js\kindeditor\plugins\quickformat\vssver2.scc" />
+    <Content Include="js\kindeditor\plugins\table\vssver2.scc" />
+    <Content Include="js\kindeditor\plugins\template\html\vssver2.scc" />
+    <Content Include="js\kindeditor\plugins\template\vssver2.scc" />
+    <Content Include="js\kindeditor\plugins\wordpaste\vssver2.scc" />
+    <Content Include="js\kindeditor\themes\common\vssver2.scc" />
+    <Content Include="js\kindeditor\themes\default\vssver2.scc" />
+    <Content Include="js\kindeditor\themes\qq\vssver2.scc" />
+    <Content Include="js\kindeditor\themes\simple\vssver2.scc" />
+    <Content Include="js\kindeditor\vssver2.scc" />
+    <Content Include="js\layer\extend\vssver2.scc" />
+    <Content Include="js\layer\skin\default\vssver2.scc" />
+    <Content Include="js\layer\skin\moon\vssver2.scc" />
+    <Content Include="js\layer\skin\vssver2.scc" />
+    <Content Include="js\layer\vssver2.scc" />
+    <Content Include="js\vssver2.scc" />
+    <None Include="Properties\PublishProfiles\admin.pubxml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Api\Caegory.aspx" />
+    <Content Include="Api\News.aspx" />
+    <Content Include="Api\News_Content.aspx" />
+    <Content Include="Api\RuleManager.aspx" />
+    <Content Include="assets\bootstrap-colorpicker\css\colorpicker.css" />
+    <Content Include="assets\bootstrap-colorpicker\img\alpha.png" />
+    <Content Include="assets\bootstrap-colorpicker\img\hue.png" />
+    <Content Include="assets\bootstrap-colorpicker\img\saturation.png" />
+    <Content Include="assets\bootstrap-colorpicker\js\bootstrap-colorpicker.js" />
+    <Content Include="assets\bootstrap-datepicker\css\datepicker.css" />
+    <Content Include="assets\bootstrap-datepicker\js\bootstrap-datepicker.js" />
+    <Content Include="assets\bootstrap-daterangepicker\date.js" />
+    <Content Include="assets\bootstrap-daterangepicker\daterangepicker.css" />
+    <Content Include="assets\bootstrap-daterangepicker\daterangepicker.js" />
+    <Content Include="assets\bootstrap-inputmask\bootstrap-inputmask.min.js" />
+    <Content Include="assets\bootstrap-timepicker\compiled\timepicker.css" />
+    <Content Include="assets\bootstrap-timepicker\js\bootstrap-timepicker.js" />
+    <Content Include="assets\bootstrap-toggle-buttons\static\js\jquery.toggle.buttons.js" />
+    <Content Include="assets\bootstrap-toggle-buttons\static\stylesheets\bootstrap-toggle-buttons.css" />
+    <Content Include="assets\bootstrap-tree\bootstrap-tree\css\bootstrap-tree.css" />
+    <Content Include="assets\bootstrap-tree\bootstrap-tree\img\bstree-halflings.png" />
+    <Content Include="assets\bootstrap-tree\bootstrap-tree\js\bootstrap-tree.js" />
+    <Content Include="assets\bootstrap-wizard\jquery.bootstrap.wizard.min.js" />
+    <Content Include="assets\bootstrap-wysihtml5\bootstrap-wysihtml5.css" />
+    <Content Include="assets\bootstrap-wysihtml5\bootstrap-wysihtml5.js" />
+    <Content Include="assets\bootstrap-wysihtml5\wysihtml5-0.3.0.js" />
+    <Content Include="assets\bootstrap\css\bootstrap-fileupload.css" />
+    <Content Include="assets\bootstrap\css\bootstrap-responsive.min.css" />
+    <Content Include="assets\bootstrap\css\bootstrap.min.css" />
+    <Content Include="assets\bootstrap\img\glyphicons-halflings-white.png" />
+    <Content Include="assets\bootstrap\img\glyphicons-halflings.png" />
+    <Content Include="assets\bootstrap\js\bootstrap-fileupload.js" />
+    <Content Include="assets\bootstrap\js\bootstrap.min.js" />
+    <Content Include="assets\chart-master\Chart.js" />
+    <Content Include="assets\chosen-bootstrap\chosen\chosen-sprite.png" />
+    <Content Include="assets\chosen-bootstrap\chosen\chosen.css" />
+    <Content Include="assets\chosen-bootstrap\chosen\chosen.jquery.min.js" />
+    <Content Include="assets\ckeditor\ckeditor.js" />
+    <Content Include="assets\clockface\css\clockface.css" />
+    <Content Include="assets\clockface\js\clockface.js" />
+    <Content Include="assets\data-tables\DT_bootstrap.css" />
+    <Content Include="assets\data-tables\DT_bootstrap.js" />
+    <Content Include="assets\data-tables\images\sort_asc.png" />
+    <Content Include="assets\data-tables\images\sort_both.png" />
+    <Content Include="assets\data-tables\images\sort_desc.png" />
+    <Content Include="assets\data-tables\jquery.dataTables.js" />
+    <Content Include="assets\dropzone\css\dropzone.css" />
+    <Content Include="assets\dropzone\dropzone.js" />
+    <Content Include="assets\dropzone\images\spritemap%402x.png" />
+    <Content Include="assets\dropzone\images\spritemap.png" />
+    <Content Include="assets\fancybox\source\blank.gif" />
+    <Content Include="assets\fancybox\source\fancybox_loading.gif" />
+    <Content Include="assets\fancybox\source\fancybox_overlay.png" />
+    <Content Include="assets\fancybox\source\fancybox_sprite.png" />
+    <Content Include="assets\fancybox\source\jquery.fancybox.css" />
+    <Content Include="assets\fancybox\source\jquery.fancybox.pack.js" />
+    <Content Include="assets\flot\jquery.flot.crosshair.js" />
+    <Content Include="assets\flot\jquery.flot.js" />
+    <Content Include="assets\flot\jquery.flot.pie.js" />
+    <Content Include="assets\flot\jquery.flot.resize.js" />
+    <Content Include="assets\flot\jquery.flot.stack.js" />
+    <Content Include="assets\font-awesome\css\font-awesome.css" />
+    <Content Include="assets\font-awesome\font\fontawesome-webfont.svg" />
+    <Content Include="assets\fullcalendar\fullcalendar\bootstrap-fullcalendar.css" />
+    <Content Include="assets\fullcalendar\fullcalendar\fullcalendar.min.js" />
+    <Content Include="assets\gritter\css\jquery.gritter.css" />
+    <Content Include="assets\gritter\images\gritter-light.png" />
+    <Content Include="assets\gritter\images\gritter.png" />
+    <Content Include="assets\gritter\images\ie-spacer.gif" />
+    <Content Include="assets\gritter\js\jquery.gritter.js" />
+    <Content Include="assets\jquery-easy-pie-chart\jquery.easy-pie-chart.css" />
+    <Content Include="assets\jquery-easy-pie-chart\jquery.easy-pie-chart.js" />
+    <Content Include="assets\jquery-slimscroll\jquery-ui-1.9.2.custom.min.js" />
+    <Content Include="assets\jquery-slimscroll\jquery.slimscroll.min.js" />
+    <Content Include="assets\jquery-tags-input\jquery.tagsinput.css" />
+    <Content Include="assets\jquery-tags-input\jquery.tagsinput.min.js" />
+    <Content Include="assets\jquery-ui\images\animated-overlay.gif" />
+    <Content Include="assets\jquery-ui\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="assets\jquery-ui\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="assets\jquery-ui\images\ui-bg_flat_10_000000_40x100.png" />
+    <Content Include="assets\jquery-ui\images\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="assets\jquery-ui\images\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="assets\jquery-ui\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="assets\jquery-ui\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="assets\jquery-ui\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="assets\jquery-ui\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <Content Include="assets\jquery-ui\images\ui-icons_222222_256x240.png" />
+    <Content Include="assets\jquery-ui\images\ui-icons_228ef1_256x240.png" />
+    <Content Include="assets\jquery-ui\images\ui-icons_ef8c08_256x240.png" />
+    <Content Include="assets\jquery-ui\images\ui-icons_ffd27a_256x240.png" />
+    <Content Include="assets\jquery-ui\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="assets\jquery-ui\jquery-ui-1.10.1.custom.min.css" />
+    <Content Include="assets\jquery-ui\jquery-ui-1.10.1.custom.min.js" />
+    <Content Include="assets\jqvmap\jqvmap\data\jquery.vmap.sampledata.js" />
+    <Content Include="assets\jqvmap\jqvmap\jquery.vmap.js" />
+    <Content Include="assets\jqvmap\jqvmap\jqvmap.css" />
+    <Content Include="assets\jqvmap\jqvmap\maps\jquery.vmap.europe.js" />
+    <Content Include="assets\jqvmap\jqvmap\maps\jquery.vmap.germany.js" />
+    <Content Include="assets\jqvmap\jqvmap\maps\jquery.vmap.russia.js" />
+    <Content Include="assets\jqvmap\jqvmap\maps\jquery.vmap.usa.js" />
+    <Content Include="assets\jqvmap\jqvmap\maps\jquery.vmap.world.js" />
+    <Content Include="assets\metr-folio\assets\grain.png" />
+    <Content Include="assets\metr-folio\assets\link.png" />
+    <Content Include="assets\metr-folio\assets\link_clean.png" />
+    <Content Include="assets\metr-folio\assets\lupe.png" />
+    <Content Include="assets\metr-folio\assets\socialbar-bg.png" />
+    <Content Include="assets\metr-folio\assets\tiles\list.png" />
+    <Content Include="assets\metr-folio\assets\tiles\topgradient.png" />
+    <Content Include="assets\metr-folio\assets\zoom_clean.png" />
+    <Content Include="assets\metr-folio\css\metro-gallery.css" />
+    <Content Include="assets\metr-folio\icons\comments.png" />
+    <Content Include="assets\metr-folio\icons\facebook.png" />
+    <Content Include="assets\metr-folio\icons\like.png" />
+    <Content Include="assets\metr-folio\icons\more.png" />
+    <Content Include="assets\metr-folio\icons\twitter.png" />
+    <Content Include="assets\metr-folio\js\jquery.metro-gal.megafoliopro.js" />
+    <Content Include="assets\metr-folio\js\jquery.metro-gal.plugins.min.js" />
+    <Content Include="assets\nestable\jquery.nestable.css" />
+    <Content Include="assets\nestable\jquery.nestable.js" />
+    <Content Include="assets\uniform\css\uniform.default.css" />
+    <Content Include="assets\uniform\images\bg-input-focus.png" />
+    <Content Include="assets\uniform\images\bg-input.png" />
+    <Content Include="assets\uniform\images\sprite.png" />
+    <Content Include="assets\uniform\jquery.uniform.min.js" />
+    <Content Include="CaegoryEdit.aspx" />
+    <Content Include="CaegoryList.aspx" />
+    <Content Include="css\audioplayer.css" />
+    <Content Include="css\divUpload\diyUpload.css" />
+    <Content Include="css\divUpload\webuploader.css" />
+    <Content Include="css\imgRectangle.css" />
+    <Content Include="css\style-default.css" />
+    <Content Include="css\style-responsive.css" />
+    <Content Include="css\style.css" />
+    <Content Include="css\timeline-component.css" />
+    <Content Include="css\videoplayer.css" />
+    <Content Include="img\404bg.jpg" />
+    <Content Include="img\500bg.jpg" />
+    <Content Include="img\about-us\img-1.jpg" />
+    <Content Include="img\about-us\img-2.jpg" />
+    <Content Include="img\about-us\img-3.jpg" />
+    <Content Include="img\about-us\img-4.jpg" />
+    <Content Include="img\avatar-mini.png" />
+    <Content Include="img\avatar1.jpg" />
+    <Content Include="img\avatar1_small.jpg" />
+    <Content Include="img\avatar2.jpg" />
+    <Content Include="img\avatar3.jpg" />
+    <Content Include="img\blog\blog-thumb-2.jpg" />
+    <Content Include="img\blog\blog-thumb-3.jpg" />
+    <Content Include="img\blog\blog1-big.jpg" />
+    <Content Include="img\blog\blog2-big.jpg" />
+    <Content Include="img\blog\blog3-big.jpg" />
+    <Content Include="img\check_alt.png" />
+    <Content Include="img\demo.png" />
+    <Content Include="img\file-search\ai.png" />
+    <Content Include="img\file-search\doc.png" />
+    <Content Include="img\file-search\email.png" />
+    <Content Include="img\file-search\eps.png" />
+    <Content Include="img\file-search\jpg.png" />
+    <Content Include="img\file-search\pdf.png" />
+    <Content Include="img\file-search\ppt.png" />
+    <Content Include="img\file-search\psd.png" />
+    <Content Include="img\file-search\rss.png" />
+    <Content Include="img\file-search\xls.png" />
+    <Content Include="img\file-search\zip.png" />
+    <Content Include="img\gallery\image1.jpg" />
+    <Content Include="img\gallery\image10.jpg" />
+    <Content Include="img\gallery\image11.jpg" />
+    <Content Include="img\gallery\image12.jpg" />
+    <Content Include="img\gallery\image13.jpg" />
+    <Content Include="img\gallery\image14.jpg" />
+    <Content Include="img\gallery\image15.jpg" />
+    <Content Include="img\gallery\image16.jpg" />
+    <Content Include="img\gallery\image17.jpg" />
+    <Content Include="img\gallery\image18.jpg" />
+    <Content Include="img\gallery\image2.jpg" />
+    <Content Include="img\gallery\image3.jpg" />
+    <Content Include="img\gallery\image4.jpg" />
+    <Content Include="img\gallery\image5.jpg" />
+    <Content Include="img\gallery\image6.jpg" />
+    <Content Include="img\gallery\image7.jpg" />
+    <Content Include="img\gallery\image8.jpg" />
+    <Content Include="img\gallery\image9.jpg" />
+    <Content Include="img\loading.gif" />
+    <Content Include="img\lock-thumb.jpg" />
+    <Content Include="img\logo.png" />
+    <Content Include="img\noimg.png" />
+    <Content Include="img\overlay-icon.png" />
+    <Content Include="img\paytype\alipay.jpg" />
+    <Content Include="img\paytype\wechat.jpg" />
+    <Content Include="img\product1.jpg" />
+    <Content Include="img\product2.png" />
+    <Content Include="img\product3.png" />
+    <Content Include="img\product4.png" />
+    <Content Include="img\product5.png" />
+    <Content Include="img\profile-contact.jpg" />
+    <Content Include="img\success.png" />
+    <Content Include="img\taobaotitle.png" />
+    <Content Include="img\vector-lab.jpg" />
+    <Content Include="img\x_alt.png" />
+    <Content Include="index.aspx" />
+    <Content Include="js\additional-methods.min.js" />
+    <Content Include="js\citys\city.min.js" />
+    <Content Include="js\citys\jquery.cityselect.js" />
+    <Content Include="js\citys\新建文本文档.txt" />
+    <Content Include="js\common-scripts.js" />
+    <Content Include="js\custom-flot-chart.js" />
+    <Content Include="js\date97\calendar.js" />
+    <Content Include="js\date97\lang\zh-cn.js" />
+    <Content Include="js\date97\my97\calendar.js" />
+    <Content Include="js\date97\my97\lang\zh-cn.js" />
+    <Content Include="js\date97\my97\skin\datePicker.gif" />
+    <Content Include="js\date97\my97\skin\default\datepicker-dev.css" />
+    <Content Include="js\date97\my97\skin\default\datepicker.css" />
+    <Content Include="js\date97\my97\skin\default\img.gif" />
+    <Content Include="js\date97\my97\skin\default\img.png" />
+    <Content Include="js\date97\my97\skin\twoer\datepicker-dev.css" />
+    <Content Include="js\date97\my97\skin\twoer\datepicker.css" />
+    <Content Include="js\date97\my97\skin\twoer\img.gif" />
+    <Content Include="js\date97\my97\skin\twoer\img.png" />
+    <Content Include="js\date97\my97\skin\WdatePicker.css" />
+    <Content Include="js\date97\my97\skin\whyGreen\bg.jpg" />
+    <Content Include="js\date97\my97\skin\whyGreen\datepicker.css" />
+    <Content Include="js\date97\my97\skin\whyGreen\img.gif" />
+    <Content Include="js\date97\my97\WdatePicker.js" />
+    <Content Include="js\date97\skin\datePicker.gif" />
+    <Content Include="js\date97\skin\default\datepicker.css" />
+    <Content Include="js\date97\skin\default\img.gif" />
+    <Content Include="js\date97\skin\WdatePicker.css" />
+    <Content Include="js\date97\WdatePicker.js" />
+    <Content Include="js\diyUpload\diyUpload.js" />
+    <Content Include="js\diyUpload\webuploader.html5only.min.js" />
+    <Content Include="js\draggable-portlet.js" />
+    <Content Include="js\editable-table.js" />
+    <Content Include="js\excanvas.js" />
+    <Content Include="js\external-dragging-calendar.js" />
+    <Content Include="js\flot-chart.js" />
+    <Content Include="js\form-component.js" />
+    <Content Include="js\form-validation-script.js" />
+    <Content Include="js\form-wizard.js" />
+    <Content Include="js\gritter.js" />
+    <Content Include="js\highcharts\highcharts.js" />
+    <Content Include="js\highcharts\jquery-1.5.2.min.js" />
+    <Content Include="js\highcharts\theme\dark-blue.js" />
+    <Content Include="js\highcharts\theme\dark-green.js" />
+    <Content Include="js\highcharts\theme\gray.js" />
+    <Content Include="js\highcharts\theme\grid.js" />
+    <Content Include="js\home-chartjs.js" />
+    <Content Include="js\home-page-calender.js" />
+    <Content Include="js\is.js" />
+    <Content Include="js\jquery-1.8.2.min.js" />
+    <Content Include="js\jquery-1.8.3.min.js" />
+    <Content Include="js\jquery.blockui.js" />
+    <Content Include="js\jQuery.dualListBox-1.3.js" />
+    <Content Include="js\jquery.json.min.js" />
+    <Content Include="js\jquery.nicescroll.js" />
+    <Content Include="js\jquery.pulsate.min.js" />
+    <Content Include="js\jquery.scrollTo.min.js" />
+    <Content Include="js\jquery.sparkline.js" />
+    <Content Include="js\kindeditor\asp.net\bin\LitJSON.dll" />
+    <Content Include="js\kindeditor\asp.net\demo.aspx" />
+    <Content Include="js\kindeditor\attached\image\20150809\20150809160911_1686.jpg" />
+    <Content Include="js\kindeditor\attached\image\20150819\20150819155050_3296.png" />
+    <Content Include="js\kindeditor\attached\image\20151205\20151205211632_0711.jpg" />
+    <Content Include="js\kindeditor\attached\image\20151205\20151205211632_1421.jpg" />
+    <Content Include="js\kindeditor\attached\image\20151209\20151209000249_3703.jpg" />
+    <Content Include="js\kindeditor\attached\image\20151209\20151209034002_5598.jpg" />
+    <Content Include="js\kindeditor\attached\image\20151209\20151209042442_7311.jpg" />
+    <Content Include="js\kindeditor\attached\image\20151215\20151215193759_8154.jpg" />
+    <Content Include="js\kindeditor\kindeditor-all-min.js" />
+    <Content Include="js\kindeditor\kindeditor-all.js" />
+    <Content Include="js\kindeditor\kindeditor-min.js" />
+    <Content Include="js\kindeditor\kindeditor.js" />
+    <Content Include="js\kindeditor\lang\ar.js" />
+    <Content Include="js\kindeditor\lang\en.js" />
+    <Content Include="js\kindeditor\lang\ko.js" />
+    <Content Include="js\kindeditor\lang\zh_CN.js" />
+    <Content Include="js\kindeditor\lang\zh_TW.js" />
+    <Content Include="js\kindeditor\plugins\anchor\anchor.js" />
+    <Content Include="js\kindeditor\plugins\autoheight\autoheight.js" />
+    <Content Include="js\kindeditor\plugins\baidumap\baidumap.js" />
+    <Content Include="js\kindeditor\plugins\baidumap\index.html" />
+    <Content Include="js\kindeditor\plugins\baidumap\map.html" />
+    <Content Include="js\kindeditor\plugins\clearhtml\clearhtml.js" />
+    <Content Include="js\kindeditor\plugins\code\code.js" />
+    <Content Include="js\kindeditor\plugins\code\prettify.css" />
+    <Content Include="js\kindeditor\plugins\code\prettify.js" />
+    <Content Include="js\kindeditor\plugins\emoticons\emoticons.js" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\0.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\1.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\10.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\100.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\101.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\102.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\103.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\104.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\105.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\106.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\107.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\108.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\109.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\11.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\110.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\111.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\112.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\113.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\114.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\115.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\116.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\117.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\118.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\119.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\12.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\120.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\121.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\122.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\123.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\124.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\125.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\126.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\127.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\128.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\129.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\13.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\130.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\131.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\132.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\133.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\134.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\14.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\15.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\16.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\17.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\18.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\19.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\2.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\20.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\21.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\22.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\23.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\24.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\25.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\26.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\27.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\28.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\29.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\3.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\30.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\31.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\32.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\33.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\34.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\35.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\36.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\37.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\38.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\39.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\4.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\40.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\41.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\42.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\43.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\44.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\45.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\46.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\47.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\48.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\49.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\5.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\50.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\51.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\52.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\53.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\54.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\55.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\56.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\57.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\58.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\59.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\6.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\60.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\61.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\62.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\63.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\64.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\65.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\66.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\67.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\68.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\69.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\7.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\70.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\71.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\72.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\73.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\74.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\75.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\76.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\77.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\78.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\79.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\8.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\80.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\81.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\82.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\83.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\84.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\85.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\86.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\87.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\88.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\89.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\9.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\90.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\91.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\92.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\93.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\94.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\95.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\96.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\97.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\98.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\99.gif" />
+    <Content Include="js\kindeditor\plugins\emoticons\images\static.gif" />
+    <Content Include="js\kindeditor\plugins\filemanager\filemanager.js" />
+    <Content Include="js\kindeditor\plugins\filemanager\images\file-16.gif" />
+    <Content Include="js\kindeditor\plugins\filemanager\images\file-64.gif" />
+    <Content Include="js\kindeditor\plugins\filemanager\images\folder-16.gif" />
+    <Content Include="js\kindeditor\plugins\filemanager\images\folder-64.gif" />
+    <Content Include="js\kindeditor\plugins\filemanager\images\go-up.gif" />
+    <Content Include="js\kindeditor\plugins\flash\flash.js" />
+    <Content Include="js\kindeditor\plugins\image\image.js" />
+    <Content Include="js\kindeditor\plugins\image\images\align_left.gif" />
+    <Content Include="js\kindeditor\plugins\image\images\align_right.gif" />
+    <Content Include="js\kindeditor\plugins\image\images\align_top.gif" />
+    <Content Include="js\kindeditor\plugins\image\images\refresh.png" />
+    <Content Include="js\kindeditor\plugins\insertfile\insertfile.js" />
+    <Content Include="js\kindeditor\plugins\lineheight\lineheight.js" />
+    <Content Include="js\kindeditor\plugins\link\link.js" />
+    <Content Include="js\kindeditor\plugins\map\map.html" />
+    <Content Include="js\kindeditor\plugins\map\map.js" />
+    <Content Include="js\kindeditor\plugins\media\media.js" />
+    <Content Include="js\kindeditor\plugins\multiimage\images\image.png" />
+    <Content Include="js\kindeditor\plugins\multiimage\images\select-files-en.png" />
+    <Content Include="js\kindeditor\plugins\multiimage\images\select-files-zh_CN.png" />
+    <Content Include="js\kindeditor\plugins\multiimage\images\swfupload.swf" />
+    <Content Include="js\kindeditor\plugins\multiimage\multiimage.js" />
+    <Content Include="js\kindeditor\plugins\pagebreak\pagebreak.js" />
+    <Content Include="js\kindeditor\plugins\plainpaste\plainpaste.js" />
+    <Content Include="js\kindeditor\plugins\preview\preview.js" />
+    <Content Include="js\kindeditor\plugins\quickformat\quickformat.js" />
+    <Content Include="js\kindeditor\plugins\table\table.js" />
+    <Content Include="js\kindeditor\plugins\template\html\1.html" />
+    <Content Include="js\kindeditor\plugins\template\html\2.html" />
+    <Content Include="js\kindeditor\plugins\template\html\3.html" />
+    <Content Include="js\kindeditor\plugins\template\template.js" />
+    <Content Include="js\kindeditor\plugins\wordpaste\wordpaste.js" />
+    <Content Include="js\kindeditor\themes\common\anchor.gif" />
+    <Content Include="js\kindeditor\themes\common\blank.gif" />
+    <Content Include="js\kindeditor\themes\common\flash.gif" />
+    <Content Include="js\kindeditor\themes\common\loading.gif" />
+    <Content Include="js\kindeditor\themes\common\media.gif" />
+    <Content Include="js\kindeditor\themes\common\rm.gif" />
+    <Content Include="js\kindeditor\themes\default\background.png" />
+    <Content Include="js\kindeditor\themes\default\default.css" />
+    <Content Include="js\kindeditor\themes\default\default.png" />
+    <Content Include="js\kindeditor\themes\qq\editor.gif" />
+    <Content Include="js\kindeditor\themes\qq\qq.css" />
+    <Content Include="js\kindeditor\themes\simple\simple.css" />
+    <Content Include="js\layer\extend\layer.ext.js" />
+    <Content Include="js\layer\layer.js" />
+    <Content Include="js\layer\layer.min.js" />
+    <Content Include="js\layer\skin\default\icon-ext.png" />
+    <Content Include="js\layer\skin\default\icon.png" />
+    <Content Include="js\layer\skin\default\loading-0.gif" />
+    <Content Include="js\layer\skin\default\loading-1.gif" />
+    <Content Include="js\layer\skin\default\loading-2.gif" />
+    <Content Include="js\layer\skin\layer.css" />
+    <Content Include="js\layer\skin\layer.ext.css" />
+    <Content Include="js\layer\skin\moon\default.png" />
+    <Content Include="js\layer\skin\moon\style.css" />
+    <Content Include="js\nestable.js" />
+    <Content Include="js\pulstate.js" />
+    <Content Include="js\respond.js" />
+    <Content Include="js\sliders.js" />
+    <Content Include="js\sparkline-chart.js" />
+    <Content Include="js\util.js" />
+    <Content Include="Login.aspx" />
+    <Content Include="main.htm" />
+    <Content Include="menu.html" />
+    <Content Include="NewsEdit.aspx" />
+    <Content Include="NewsList.aspx" />
+    <Content Include="News_ContentEdit.aspx" />
+    <Content Include="News_ContentList.aspx" />
+    <Content Include="script\Caegory.js" />
+    <Content Include="script\CaegoryEdit.js" />
+    <Content Include="script\Index.js" />
+    <Content Include="script\login.js" />
+    <Content Include="script\Manager.js" />
+    <Content Include="script\News.js" />
+    <Content Include="script\NewsEdit.js" />
+    <Content Include="script\News_Content.js" />
+    <Content Include="script\News_ContentEdit.js" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Api\Caegory.aspx.cs">
+      <DependentUpon>Caegory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Api\Caegory.aspx.designer.cs">
+      <DependentUpon>Caegory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\News.aspx.cs">
+      <DependentUpon>News.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Api\News.aspx.designer.cs">
+      <DependentUpon>News.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\News_Content.aspx.cs">
+      <DependentUpon>News_Content.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Api\News_Content.aspx.designer.cs">
+      <DependentUpon>News_Content.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\RuleManager.aspx.cs">
+      <DependentUpon>RuleManager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Api\RuleManager.aspx.designer.cs">
+      <DependentUpon>RuleManager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CaegoryEdit.aspx.cs">
+      <DependentUpon>CaegoryEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CaegoryEdit.aspx.designer.cs">
+      <DependentUpon>CaegoryEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CaegoryList.aspx.cs">
+      <DependentUpon>CaegoryList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CaegoryList.aspx.designer.cs">
+      <DependentUpon>CaegoryList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NewsEdit.aspx.cs">
+      <DependentUpon>NewsEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NewsEdit.aspx.designer.cs">
+      <DependentUpon>NewsEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NewsList.aspx.cs">
+      <DependentUpon>NewsList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NewsList.aspx.designer.cs">
+      <DependentUpon>NewsList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="News_ContentEdit.aspx.cs">
+      <DependentUpon>News_ContentEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="News_ContentEdit.aspx.designer.cs">
+      <DependentUpon>News_ContentEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="News_ContentList.aspx.cs">
+      <DependentUpon>News_ContentList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="News_ContentList.aspx.designer.cs">
+      <DependentUpon>News_ContentList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Blog.Common\Blog.Common.csproj">
+      <Project>{66483994-52ef-4a6a-adf9-3b27b4363721}</Project>
+      <Name>Blog.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Blog.DAL\Blog.DAL.csproj">
+      <Project>{d29552a6-5516-4c2b-b19a-b954d833d6fb}</Project>
+      <Name>Blog.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Blog.Model\Blog.Model.csproj">
+      <Project>{009c3453-2a1a-4021-90e4-aba085463ad6}</Project>
+      <Name>Blog.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>12932</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:12932/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

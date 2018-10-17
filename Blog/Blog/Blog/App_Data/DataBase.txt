@@ -1,0 +1,972 @@
+﻿USE [master]
+GO
+/****** Object:  Database [Blog]    Script Date: 01/17/2018 14:55:45 ******/
+CREATE DATABASE [Blog] ON  PRIMARY 
+( NAME = N'Blog', FILENAME = N'C:\Program Files (x86)\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\Blog.mdf' , SIZE = 3072KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
+ LOG ON 
+( NAME = N'Blog_log', FILENAME = N'C:\Program Files (x86)\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\Blog_log.ldf' , SIZE = 1024KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)
+GO
+ALTER DATABASE [Blog] SET COMPATIBILITY_LEVEL = 100
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [Blog].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [Blog] SET ANSI_NULL_DEFAULT OFF
+GO
+ALTER DATABASE [Blog] SET ANSI_NULLS OFF
+GO
+ALTER DATABASE [Blog] SET ANSI_PADDING OFF
+GO
+ALTER DATABASE [Blog] SET ANSI_WARNINGS OFF
+GO
+ALTER DATABASE [Blog] SET ARITHABORT OFF
+GO
+ALTER DATABASE [Blog] SET AUTO_CLOSE OFF
+GO
+ALTER DATABASE [Blog] SET AUTO_CREATE_STATISTICS ON
+GO
+ALTER DATABASE [Blog] SET AUTO_SHRINK OFF
+GO
+ALTER DATABASE [Blog] SET AUTO_UPDATE_STATISTICS ON
+GO
+ALTER DATABASE [Blog] SET CURSOR_CLOSE_ON_COMMIT OFF
+GO
+ALTER DATABASE [Blog] SET CURSOR_DEFAULT  GLOBAL
+GO
+ALTER DATABASE [Blog] SET CONCAT_NULL_YIELDS_NULL OFF
+GO
+ALTER DATABASE [Blog] SET NUMERIC_ROUNDABORT OFF
+GO
+ALTER DATABASE [Blog] SET QUOTED_IDENTIFIER OFF
+GO
+ALTER DATABASE [Blog] SET RECURSIVE_TRIGGERS OFF
+GO
+ALTER DATABASE [Blog] SET  DISABLE_BROKER
+GO
+ALTER DATABASE [Blog] SET AUTO_UPDATE_STATISTICS_ASYNC OFF
+GO
+ALTER DATABASE [Blog] SET DATE_CORRELATION_OPTIMIZATION OFF
+GO
+ALTER DATABASE [Blog] SET TRUSTWORTHY OFF
+GO
+ALTER DATABASE [Blog] SET ALLOW_SNAPSHOT_ISOLATION OFF
+GO
+ALTER DATABASE [Blog] SET PARAMETERIZATION SIMPLE
+GO
+ALTER DATABASE [Blog] SET READ_COMMITTED_SNAPSHOT OFF
+GO
+ALTER DATABASE [Blog] SET HONOR_BROKER_PRIORITY OFF
+GO
+ALTER DATABASE [Blog] SET  READ_WRITE
+GO
+ALTER DATABASE [Blog] SET RECOVERY FULL
+GO
+ALTER DATABASE [Blog] SET  MULTI_USER
+GO
+ALTER DATABASE [Blog] SET PAGE_VERIFY CHECKSUM
+GO
+ALTER DATABASE [Blog] SET DB_CHAINING OFF
+GO
+EXEC sys.sp_db_vardecimal_storage_format N'Blog', N'ON'
+GO
+USE [Blog]
+GO
+/****** Object:  Table [dbo].[Reviews]    Script Date: 01/17/2018 14:55:46 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Reviews](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[NewsID] [int] NOT NULL,
+	[ReviewContent] [nvarchar](50) NULL,
+	[ReviewName] [nvarchar](50) NULL,
+	[Email] [nvarchar](50) NULL,
+	[replyID] [int] NULL,
+ CONSTRAINT [PK_Reviews] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'留言ID' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Reviews', @level2type=N'COLUMN',@level2name=N'ID'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'新闻ID' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Reviews', @level2type=N'COLUMN',@level2name=N'NewsID'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'留言内容' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Reviews', @level2type=N'COLUMN',@level2name=N'ReviewContent'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'留言姓名' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Reviews', @level2type=N'COLUMN',@level2name=N'ReviewName'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'邮箱' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Reviews', @level2type=N'COLUMN',@level2name=N'Email'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'用来解决留言回复留言的情况' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Reviews', @level2type=N'COLUMN',@level2name=N'replyID'
+GO
+SET IDENTITY_INSERT [dbo].[Reviews] ON
+INSERT [dbo].[Reviews] ([ID], [NewsID], [ReviewContent], [ReviewName], [Email], [replyID]) VALUES (1, 5, N'这个帖子正好解决了我上传的困难，很棒！', N'小虎', N'1@qq.com', 0)
+INSERT [dbo].[Reviews] ([ID], [NewsID], [ReviewContent], [ReviewName], [Email], [replyID]) VALUES (2, 5, N'我和你有同样的感受', N'琦琦', N'2@qq.com', 1)
+INSERT [dbo].[Reviews] ([ID], [NewsID], [ReviewContent], [ReviewName], [Email], [replyID]) VALUES (3, 3, N'效率不错', N'ccc', N'123@qq.com', 0)
+INSERT [dbo].[Reviews] ([ID], [NewsID], [ReviewContent], [ReviewName], [Email], [replyID]) VALUES (7, 4, N'我觉得像这种算法的帖子应该多看看', N'少年与鹿', N'123@qq.com', 1)
+INSERT [dbo].[Reviews] ([ID], [NewsID], [ReviewContent], [ReviewName], [Email], [replyID]) VALUES (8, 6, N'让我知道了一些我不知道的功能', N'骑驴看马', N'123@qq.com', 1)
+SET IDENTITY_INSERT [dbo].[Reviews] OFF
+/****** Object:  Table [dbo].[News_Content]    Script Date: 01/17/2018 14:55:46 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[News_Content](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[NewsID] [int] NOT NULL,
+	[N_Content] [nvarchar](max) NULL,
+	[attributes] [nvarchar](50) NULL,
+	[weight] [int] NULL,
+	[State] [bit] NULL,
+	[Headings] [bit] NULL,
+ CONSTRAINT [PK_News_Content] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'新闻内容ID' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'News_Content', @level2type=N'COLUMN',@level2name=N'ID'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'新闻ID' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'News_Content', @level2type=N'COLUMN',@level2name=N'NewsID'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'新闻内容' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'News_Content', @level2type=N'COLUMN',@level2name=N'N_Content'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'新闻属性' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'News_Content', @level2type=N'COLUMN',@level2name=N'attributes'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'新闻权重' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'News_Content', @level2type=N'COLUMN',@level2name=N'weight'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'是否禁用' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'News_Content', @level2type=N'COLUMN',@level2name=N'State'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'小标题' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'News_Content', @level2type=N'COLUMN',@level2name=N'Headings'
+GO
+SET IDENTITY_INSERT [dbo].[News_Content] ON
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (2, 1, N'TOTP 是一个基于时间的一次性密码算法（也称时间同步的动态密码）。它使用共享密钥和当前时间来生成一个密码，目前这个算法已经写入国际标准 RFC 6238，并且多被用于双因素认证（2FA）系统。                       
+                   ', N'文本', 100, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (3, 1, N' 算法原理                      
+                   ', N'文本', 99, 0, 1)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (4, 1, N'http://qqdb.oss-cn-beijing.aliyuncs.com/upload/blog/source/6a0ef222-9045-49a7-9fa5-89731c0fffef.jpg', N'图片', 98, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (5, 1, N'简介                       
+                   ', N'文本', 97, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (6, 1, N'动态口令的基本认证原理是认证双方使用同一个共享密钥对时间进行密码算法计算，之后比较计算值是否一致从而进行认证。TOTP 使用加密散列函数将密钥与当前时间戳结合，来生成一次性密码。                       
+                   ', N'文本', 96, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (7, 1, N'在认证双方比对计算值是否一致的过程中会有各种原因的延迟。比如在同一个哈希有效期的时间长度内，动态密码生成的结果是一样的，但是由于网络的原因，客户端生成密码的时间和服务器接受密码的时间可能差距会很大，导致两个密码不在同一个哈希有效期的时间长度内，所以导致认证失败。这个时候就需要验证系统有一个延时的策略，可以允许验证前几个哈希有效期的时间长度的动态密码。但是哈希有效期的时间长度设置的越大，就会更容易导致被攻击破解，并且每一个哈希有效期的时间长度只会生成一个密码，所以时间如果过长的话会影响用户体验，因此权衡考虑安全性和可用性这里默认的哈希有效期的时间长度为 30 秒。                       
+                   ', N'文本', 95, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (8, 1, N'算法                       
+                   ', N'文本', 94, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (10, 1, N'TOTP = Truncate(HMAC−SHA−1(SecretKey,((unixtime(now) − unixtime(T0)) / TS))
+HMAC−SHA−1 是从 SHA1 哈希函数构造的一种哈希算法，被用作 HMAC（基于哈希的消息验证代码），此 HMAC 进程将密钥与消息数据混合，使用哈希函数对混合结果进行哈希计算，将所得哈希值与该密钥混合，然后再次应用哈希函数，输出的哈希值长度为 160 位。SecretKey 是服务端与客户端共享的一个任意字节的秘钥。unixtime(now) 是当前 Unix 时间戳，unixtime(T0) 是约定的起始时间点的时间戳，默认是 0 ，也就是 1970年1月1日。 TS 为哈希有效期的时间长度，默认为 30 秒。                       
+                   ', N'文本', 93, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (11, 1, N'要求                       
+                   ', N'文本', 92, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (12, 1, N'服务端与客户端之间共享密钥                       
+                   ', N'文本', 91, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (13, 1, N'服务端与客户端之间时间相同                       
+                   ', N'文本', 90, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (14, 1, N'服务端与客户端之间使用相同的哈希有效期的时间长度                       
+                   ', N'文本', 89, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (15, 1, N'经典场景                       
+                   ', N'文本', 88, 0, 1)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (16, 1, N'http://qqdb.oss-cn-beijing.aliyuncs.com/upload/blog/source/782b33e5-1983-4597-8bd3-4eb18f90e18c.jpg', N'图片', 87, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (17, 1, N'参考资料                       
+                   ', N'文本', 86, 0, 1)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (18, 1, N'  RFC 6238 - Time-Based One-Time Password Algorithm                     
+                   ', N'文本', 85, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (19, 1, N'Cryptographic hash function                       
+                   ', N'文本', 84, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (20, 1, N'Hash-based message authentication code                       
+                   ', N'文本', 83, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (21, 1, N'Time-Based One-Time Password Algorithm                       
+                   ', N'文本', 82, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (22, 3, N'http://qqdb.oss-cn-beijing.aliyuncs.com/upload/blog/source/8bfcd65c-ce78-428c-9377-2a8bceb2c0d6.jpg', N'图片', 100, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (23, 3, N'元旦之后的第一个工作日可谓是惊喜不断，4号就传来了 Google Project Zero 等团队和个人报告的 Meltdown 和 Spectre 内核漏洞的消息，首先简单介绍一下这两个内核漏洞。                       
+                   ', N'文本', 99, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (24, 3, N'漏洞介绍                       
+                   ', N'文本', 98, 0, 1)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (25, 3, N'Meltdown 打破了用户应用程序和操作系统之间最基本的隔离，这种攻击允许程序访问其他程序和操作系统的内存。                       
+                   ', N'文本', 97, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (26, 3, N'Spectre 打破了不同应用程序之间的隔离，它允许攻击者欺骗遵循完美运行的程序泄露它的所有数据。事实上，完美运行的程序进行安全检查实际上会增加攻击面，并可能使应用程序更容易受到 Spectre 的影响。                       
+                   ', N'文本', 96, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (27, 3, N'影响范围                       
+                   ', N'文本', 95, 0, 1)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (28, 3, N'哪些系统受到 Meltdown 的影响？
+
+台式机，笔记本电脑，云服务器都可能会受到 Meltdown 的影响。从技术上讲，每个使用英特尔处理器的机器都可能受到影响，目前只是成功在2011年发布的英特尔处理器上测试了 Meltdown，还不清楚 ARM 和 AMD 处理器是否也受到影响                       
+                   ', N'文本', 94, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (29, 3, N'哪些系统受到 Spectre 的影响？
+
+台式机，笔记本电脑，云服务器以及智能手机都可能会受到 Spectre 的影响。更具体地说，能够保持许多指令在飞行中的所有现代处理器都可能是脆弱的。特别是，我们在Intel，AMD和ARM处理器上验证了Spectre。                       
+                   ', N'文本', 93, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (30, 3, N'哪家云提供商受到 Meltdown 的影响？
+
+使用 Intel CPU 和没有补丁的 Xen PV 作为虚拟化的云提供商将会受到影响。                       
+                   ', N'文本', 92, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (31, 3, N' 漏洞验证                      
+                   ', N'文本', 91, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (32, 3, N'  根据 Spectre 报告的 POC，以及 ErikAugust 提供的验证例子，三哥这里在使用 Intel 处理器的 Debian 64位操作系统实验环境下进行测试。                     
+                   ', N'文本', 90, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (33, 3, N' 示例中首先在内存中申请一段空间，写入如下字符串：                      
+                   ', N'文本', 89, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (34, 3, N'char * secret = "The Magic Words are Squeamish Ossifrage.";                       
+                   ', N'文本', 88, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (35, 3, N'然后设置高速缓存命中阈值为200，这里根据CPU不同也有所不同，多次尝试获取最佳值：                       
+                   ', N'文本', 87, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (36, 3, N' #define CACHE_HIT_THRESHOLD (200)                      
+                   ', N'文本', 86, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (37, 3, N' $ uname -a                      
+                   ', N'文本', 85, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (38, 3, N' Linux debian 4.14.0-2-amd64 #1 SMP Debian 4.14.7-1 (2017-12-22) x86_64 GNU/Linux                      
+                   ', N'文本', 84, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (39, 3, N'$ lscpu                       
+                   ', N'文本', 83, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (40, 3, N'http://qqdb.oss-cn-beijing.aliyuncs.com/upload/blog/source/49885d61-30ff-4f53-aed5-7a2a70face4f.jpg', N'图片', 82, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (41, 3, N'  回显结果                     
+                   ', N'文本', 81, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (42, 3, N'http://qqdb.oss-cn-beijing.aliyuncs.com/upload/blog/source/3a0f944d-c98f-4144-96c2-4dcd3b8392bd.jpg', N'图片', 80, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (43, 3, N' 漏洞修复                      
+                   ', N'文本', 79, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (44, 3, N' 截止目前，微软已经推出了临时修复补丁 KB4056982，升级后系统版本号迭代到 Build 16299.192。不过，Spectre 由于复杂度更高、极为顽固，暂时还无解，修复正在进行中。                      
+                   ', N'文本', 78, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (45, 4, N'目的说明                       
+                   ', N'文本', 99, 0, 1)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (46, 4, N'一、假设有 n 个人领红包；                      
+                   ', N'文本', 98, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (47, 4, N'二、每个人领到红包总和为 m 元；                       
+                   ', N'文本', 97, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (48, 4, N'三、每个人至少领到 0.01 元红包；                       
+                   ', N'文本', 96, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (49, 4, N'四、每个人领到红包额度相差范围小。                       
+                   ', N'文本', 95, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (50, 4, N' 思维逻辑                      
+                   ', N'文本', 94, 0, 1)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (51, 4, N'当 n 为1时：n1 = m                       
+                   ', N'文本', 93, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (52, 4, N'当 n 为2时：n1 = 0.01 ~ m       n2 = m - n1                       
+                   ', N'文本', 92, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (53, 4, N'当 n 为3时：n1 = 0.01 ~ m       n2 = 0.01 ~ ( m - n1 )       n3 = m - n1 - n2
+
+……                       
+                   ', N'文本', 91, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (54, 4, N'算法实现                       
+                   ', N'文本', 90, 0, 1)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (55, 4, N'http://qqdb.oss-cn-beijing.aliyuncs.com/upload/blog/source/0835c4ea-826d-4b4d-8522-8bf89b19e1de.jpg', N'图片', 89, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (56, 4, N'一个基于 PHP 的随机算法，完成了模仿 QQ、微信的红包随机分配规则，实现 N 个人领红包，每个人领到红包总和为 M 元，并且每个人领到红包额度相差范围合理                       
+                   ', N'文本', 100, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (57, 5, N'Ckeditor下载地址：http://ckeditor.com/download', N'文本', 100, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (59, 5, N'下载后默认放在网站根目录下 ckeditor文件夹中                       
+                   ', N'文本', 99, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (60, 5, N'一、使用方法：                       
+                   ', N'文本', 97, 0, 1)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (63, 5, N'1、在页面<head>中引入ckeditor核心文件ckeditor.js                       
+                   ', N'文本', 95, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (64, 5, N'<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">script </span><span style="color: #ff0000;">type</span><span style="color: #0000ff;">="text/javascript"</span><span style="color: #ff0000;"> src</span><span style="color: #0000ff;">="ckeditor/ckeditor.js"</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">script</span><span style="color: #0000ff;">&gt;</span></pre>                       
+                   ', N'文本', 94, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (66, 5, N'2、在使用编辑器的地方插入HTML控件textarea                      
+                   ', N'文本', 93, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (67, 5, N'<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">textarea </span><span style="color: #ff0000;">id</span><span style="color: #0000ff;">="TextArea1"</span><span style="color: #ff0000;"> cols</span><span style="color: #0000ff;">="20"</span><span style="color: #ff0000;"> rows</span><span style="color: #0000ff;">="2"</span><span style="color: #ff0000;"> class</span><span style="color: #0000ff;">="ckeditor"</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">textarea</span><span style="color: #0000ff;">&gt;</span></pre>                       
+                   ', N'文本', 92, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (68, 5, N'如果是ASP.NET环境，也可用服务器端控件TextBox                     
+                   ', N'文本', 91, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (69, 5, N'<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">asp:TextBox </span><span style="color: #ff0000;">ID</span><span style="color: #0000ff;">="tbContent"</span><span style="color: #ff0000;"> runat</span><span style="color: #0000ff;">="server"</span><span style="color: #ff0000;"> TextMode</span><span style="color: #0000ff;">="MultiLine"</span><span style="color: #ff0000;"> class</span><span style="color: #0000ff;">="ckeditor"</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">asp:TextBox</span><span style="color: #0000ff;">&gt;</span></pre>                       
+                   ', N'文本', 90, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (70, 5, N'注意在控件中加上 class="ckeditor" 。                       
+                   ', N'文本', 89, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (71, 5, N'3、将相应的控件替换成编辑器代码                       
+                   ', N'文本', 88, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (72, 5, N'<pre>&lt;script type="text/javascript"&gt;<span style="color: #000000;">
+    CKEDITOR.replace(</span>''TextArea1''<span style="color: #000000;">);
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">如果是在ASP.NET环境下用的服务器端控 件&lt;TextBox&gt;</span>
+    CKEDITOR.replace(''tbContent''<span style="color: #000000;">);
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">如 果&lt;TextBox&gt;控件在母版页中，要这样写</span>
+    CKEDITOR.replace(''&lt;%=tbContent.ClientID.Replace("_","$") %&gt;''<span style="color: #000000;">);
+</span>&lt;/script&gt;</pre>                       
+                   ', N'文本', 87, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (73, 5, N'4、配置编辑器                       
+                   ', N'文本', 86, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (74, 5, N' ckeditor的配置都集中在 ckeditor/config.js 文件中，下面是一些常用的配置参数：                       
+                   ', N'文本', 85, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (75, 5, N'<pre><span style="color: #008000;">//</span><span style="color: #008000;"> 界面语言，默认为 ''en''</span>
+    config.language = ''zh-cn''<span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;"> 设置宽高</span>
+    config.width = 400<span style="color: #000000;">;
+    config.height </span>= 400<span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;"> 编辑器样式，有三种：''kama''（默认）、''office2003''、''v2''</span>
+    config.skin = ''v2''<span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;"> 背景颜色</span>
+    config.uiColor = ''#FFF''<span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;"> 工具栏（基础''Basic''、全能''Full''、自定义）plugins/toolbar/plugin.js</span>
+    config.toolbar = ''Basic''<span style="color: #000000;">;
+    config.toolbar </span>= ''Full''<span style="color: #000000;">;
+    这将配合：
+    config.toolbar_Full </span>=<span style="color: #000000;"> [
+       [</span>''Source'',''-'',''Save'',''NewPage'',''Preview'',''-'',''Templates''<span style="color: #000000;">],
+       [</span>''Cut'',''Copy'',''Paste'',''PasteText'',''PasteFromWord'',''-'',''Print'', ''SpellChecker'', ''Scayt''<span style="color: #000000;">],
+       [</span>''Undo'',''Redo'',''-'',''Find'',''Replace'',''-'',''SelectAll'',''RemoveFormat''<span style="color: #000000;">],
+       [</span>''Form'', ''Checkbox'', ''Radio'', ''TextField'', ''Textarea'', ''Select'', ''Button'', ''ImageButton'', ''HiddenField''<span style="color: #000000;">],
+       </span>''/''<span style="color: #000000;">,
+       [</span>''Bold'',''Italic'',''Underline'',''Strike'',''-'',''Subscript'',''Superscript''<span style="color: #000000;">],
+        [</span>''NumberedList'',''BulletedList'',''-'',''Outdent'',''Indent'',''Blockquote''<span style="color: #000000;">],
+        [</span>''JustifyLeft'',''JustifyCenter'',''JustifyRight'',''JustifyBlock''<span style="color: #000000;">],
+        [</span>''Link'',''Unlink'',''Anchor''<span style="color: #000000;">],
+       [</span>''Image'',''Flash'',''Table'',''HorizontalRule'',''Smiley'',''SpecialChar'',''PageBreak''<span style="color: #000000;">],
+       </span>''/''<span style="color: #000000;">,
+        [</span>''Styles'',''Format'',''Font'',''FontSize''<span style="color: #000000;">],
+        [</span>''TextColor'',''BGColor''<span style="color: #000000;">]
+    ];
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">工具栏是否可以被收缩</span>
+    config.toolbarCanCollapse = <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">工具栏的位置</span>
+    config.toolbarLocation = ''top'';<span style="color: #008000;">//</span><span style="color: #008000;">可选：bottom</span>
+    <span style="color: #008000;">//</span><span style="color: #008000;">工具栏默认是否展开</span>
+    config.toolbarStartupExpanded = <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;"> 取消 &ldquo;拖拽以改变尺寸&rdquo;功能 plugins/resize/plugin.js</span>
+    config.resize_enabled = <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">改变大小的最大高度</span>
+    config.resize_maxHeight = 3000<span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">改变大小的最大宽度</span>
+    config.resize_maxWidth = 3000<span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">改变大小的最小高度</span>
+    config.resize_minHeight = 250<span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">改变大小的最小宽度</span>
+    config.resize_minWidth = 750<span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;"> 当提交包含有此编辑器的表单时，是否自动更新元素内的数据</span>
+    config.autoUpdateElement = <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;"> 设置是使用绝对目录还是相对目录，为空为相对目录</span>
+    config.baseHref = ''''
+    <span style="color: #008000;">//</span><span style="color: #008000;"> 编辑器的z-index值</span>
+    config.baseFloatZIndex = 10000<span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">设置快捷键</span>
+    config.keystrokes =<span style="color: #000000;"> [
+       [ CKEDITOR.ALT </span>+ 121 <span style="color: #008000;">/*</span><span style="color: #008000;">F10</span><span style="color: #008000;">*/</span>, ''toolbarFocus'' ],  <span style="color: #008000;">//</span><span style="color: #008000;">获取焦点</span>
+        [ CKEDITOR.ALT + 122 <span style="color: #008000;">/*</span><span style="color: #008000;">F11</span><span style="color: #008000;">*/</span>, ''elementsPathFocus'' ],  <span style="color: #008000;">//</span><span style="color: #008000;">元素焦点</span>
+       [ CKEDITOR.SHIFT + 121 <span style="color: #008000;">/*</span><span style="color: #008000;">F10</span><span style="color: #008000;">*/</span>, ''contextMenu'' ],  <span style="color: #008000;">//</span><span style="color: #008000;">文本菜单</span>
+       [ CKEDITOR.CTRL + 90 <span style="color: #008000;">/*</span><span style="color: #008000;">Z</span><span style="color: #008000;">*/</span>, ''undo'' ],  <span style="color: #008000;">//</span><span style="color: #008000;">撤销</span>
+        [ CKEDITOR.CTRL + 89 <span style="color: #008000;">/*</span><span style="color: #008000;">Y</span><span style="color: #008000;">*/</span>, ''redo'' ],  <span style="color: #008000;">//</span><span style="color: #008000;">重做</span>
+        [ CKEDITOR.CTRL + CKEDITOR.SHIFT + 90 <span style="color: #008000;">/*</span><span style="color: #008000;">Z</span><span style="color: #008000;">*/</span>, ''redo'' ],  <span style="color: #008000;">//
+</span>        [ CKEDITOR.CTRL + 76 <span style="color: #008000;">/*</span><span style="color: #008000;">L</span><span style="color: #008000;">*/</span>, ''link'' ],  <span style="color: #008000;">//</span><span style="color: #008000;">链接</span>
+        [ CKEDITOR.CTRL + 66 <span style="color: #008000;">/*</span><span style="color: #008000;">B</span><span style="color: #008000;">*/</span>, ''bold'' ],  <span style="color: #008000;">//</span><span style="color: #008000;">粗体</span>
+        [ CKEDITOR.CTRL + 73 <span style="color: #008000;">/*</span><span style="color: #008000;">I</span><span style="color: #008000;">*/</span>, ''italic'' ],  <span style="color: #008000;">//</span><span style="color: #008000;">斜体</span>
+        [ CKEDITOR.CTRL + 85 <span style="color: #008000;">/*</span><span style="color: #008000;">U</span><span style="color: #008000;">*/</span>, ''underline'' ],  <span style="color: #008000;">//</span><span style="color: #008000;">下划线</span>
+        [ CKEDITOR.ALT + 109 <span style="color: #008000;">/*</span><span style="color: #008000;">-</span><span style="color: #008000;">*/</span>, ''toolbarCollapse''<span style="color: #000000;"> ]
+    ]
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">设置快捷键 可能与浏览器快捷键冲突 plugins/keystrokes/plugin.js.</span>
+    config.blockedKeystrokes =<span style="color: #000000;"> [
+        CKEDITOR.CTRL </span>+ 66 <span style="color: #008000;">/*</span><span style="color: #008000;">B</span><span style="color: #008000;">*/</span><span style="color: #000000;">,
+        CKEDITOR.CTRL </span>+ 73 <span style="color: #008000;">/*</span><span style="color: #008000;">I</span><span style="color: #008000;">*/</span><span style="color: #000000;">,
+        CKEDITOR.CTRL </span>+ 85 <span style="color: #008000;">/*</span><span style="color: #008000;">U</span><span style="color: #008000;">*/</span><span style="color: #000000;">
+    ]
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">设置编辑内元素的背景色的取值 plugins/colorbutton/plugin.js.</span>
+    config.colorButton_backStyle =<span style="color: #000000;"> {
+        element : </span>''span''<span style="color: #000000;">,
+        styles : { </span>''background-color'' : ''#(color)''<span style="color: #000000;"> }
+    }
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">设置前景色的取值 plugins/colorbutton/plugin.js</span>
+    config.colorButton_colors = ''<span style="color: #000000;">000,800000,8B4513,2F4F4F,008080,000080,4B0082,696969,B22222,A52A2A,DAA520,006400,40E0D0,0000CD,800080,808080,F00,FF8C00,FFD700,008000,0FF,00F,EE82EE,A9A9A9,FFA07A,FFA500,FFFF00,00FF00,AFEEEE,ADD8E6,DDA0DD,D3D3D3,FFF0F5,FAEBD7,FFFFE0,F0FFF0,F0FFFF,F0F8FF,E6E6FA,FFF&rsquo;
+
+    //是否在选择颜色时显示&ldquo;其它颜色&rdquo;选项 plugins/colorbutton/plugin.js
+    config.colorButton_enableMore = false
+    //区块的前景色默认值设置 plugins/colorbutton/plugin.js
+    config.colorButton_foreStyle = {
+        element : </span>''span''<span style="color: #000000;">,
+        styles : { </span>''color'' : ''#(color)''<span style="color: #000000;"> }
+    };
+    //所需要添加的CSS文件 在此添加 可使用相对路径和网站的绝对路径
+    config.contentsCss = </span>''./contents.css'';
+    <span style="color: #008000;">//</span><span style="color: #008000;">文字方向</span>
+    config.contentsLangDirection = ''rtl''; <span style="color: #008000;">//</span><span style="color: #008000;">从左到右</span>
+    <span style="color: #008000;">//</span><span style="color: #008000;">CKeditor的配置文件 若不想配置 留空即可</span>
+    CKEDITOR.replace( ''myfiled'', { customConfig : ''./config.js''<span style="color: #000000;"> } );
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">界面编辑框的背景色 plugins/dialog/plugin.js</span>
+    config.dialog_backgroundCoverColor = ''#fffefd''; <span style="color: #008000;">//</span><span style="color: #008000;">可设置参考</span>
+    config.dialog_backgroundCoverColor = ''white'' <span style="color: #008000;">//</span><span style="color: #008000;">默认</span>
+    <span style="color: #008000;">//</span><span style="color: #008000;">背景的不透明度 数值应该在：0.0～1.0 之间 plugins/dialog/plugin.js</span>
+    config.dialog_backgroundCoverOpacity = 0.5
+    <span style="color: #008000;">//</span><span style="color: #008000;">移动或者改变元素时 边框的吸附距离 单位：像素 plugins/dialog/plugin.js</span>
+    config.dialog_magnetDistance = 20<span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">是否拒绝本地拼写检查和提示 默认为拒绝 目前仅firefox和safari支持 plugins/wysiwygarea/plugin.js.</span>
+    config.disableNativeSpellChecker = <span style="color: #0000ff;">true</span>
+    <span style="color: #008000;">//</span><span style="color: #008000;">进行表格编辑功能 如：添加行或列 目前仅firefox支持 plugins/wysiwygarea/plugin.js</span>
+    config.disableNativeTableHandles = <span style="color: #0000ff;">true</span>; <span style="color: #008000;">//</span><span style="color: #008000;">默认为不开启</span>
+    <span style="color: #008000;">//</span><span style="color: #008000;">是否开启 图片和表格 的改变大小的功能 config.disableObjectResizing = true;</span>
+    config.disableObjectResizing = <span style="color: #0000ff;">false</span> <span style="color: #008000;">//</span><span style="color: #008000;">默认为开启</span>
+    <span style="color: #008000;">//</span><span style="color: #008000;">设置HTML文档类型</span>
+    config.docType = ''&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd%22''<span style="color: #000000;"> ;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">是否对编辑区域进行渲染 plugins/editingblock/plugin.js</span>
+    config.editingBlock = <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">编辑器中回车产生的标签</span>
+    config.enterMode = CKEDITOR.ENTER_P; <span style="color: #008000;">//</span><span style="color: #008000;">可选：CKEDITOR.ENTER_BR或CKEDITOR.ENTER_DIV</span>
+    <span style="color: #008000;">//</span><span style="color: #008000;">是否使用HTML实体进行输出 plugins/entities/plugin.js</span>
+    config.entities = <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">定义更多的实体 plugins/entities/plugin.js</span>
+    config.entities_additional = ''#39''; <span style="color: #008000;">//</span><span style="color: #008000;">其中#代替了&amp;</span>
+    <span style="color: #008000;">//</span><span style="color: #008000;">是否转换一些难以显示的字符为相应的HTML字符 plugins/entities/plugin.js</span>
+    config.entities_greek = <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">是否转换一些拉丁字符为HTML plugins/entities/plugin.js</span>
+    config.entities_latin = <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">是否转换一些特殊字符为ASCII字符 如"This is Chinese: 汉语."转换为"This is Chinese: 汉语." plugins/entities/plugin.js</span>
+    config.entities_processNumerical = <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">添加新组件</span>
+    config.extraPlugins = ''myplugin''; <span style="color: #008000;">//</span><span style="color: #008000;">非默认 仅示例</span>
+    <span style="color: #008000;">//</span><span style="color: #008000;">使用搜索时的高亮色 plugins/find/plugin.js</span>
+    config.find_highlight =<span style="color: #000000;"> {
+        element : </span>''span''<span style="color: #000000;">,
+        styles : { </span>''background-color'' : ''#ff0'', ''color'' : ''#00f''<span style="color: #000000;"> }
+    };
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">默认的字体名 plugins/font/plugin.js</span>
+    config.font_defaultLabel = ''Arial''<span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">字体编辑时的字符集 可以添加常用的中文字符：宋体、楷体、黑体等 plugins/font/plugin.js</span>
+    config.font_names = ''Arial;Times New Roman;Verdana''<span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">文字的默认式样 plugins/font/plugin.js</span>
+    config.font_style =<span style="color: #000000;"> {
+        element   : </span>''span''<span style="color: #000000;">,
+        styles   : { </span>''font-family'' : ''#(family)''<span style="color: #000000;"> },
+        overrides : [ { element : </span>''font'', attributes : { ''face'' : <span style="color: #0000ff;">null</span><span style="color: #000000;"> } } ]
+    };
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">字体默认大小 plugins/font/plugin.js</span>
+    config.fontSize_defaultLabel = ''12px''<span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">字体编辑时可选的字体大小 plugins/font/plugin.js</span>
+    config.fontSize_sizes =''8/8px;9/9px;10/10px;11/11px;12/12px;14/14px;16/16px;18/18px;20/20px;22/22px;24/24px;26/26px;28/28px;36/36px;48/48px;72/72px''
+    <span style="color: #008000;">//</span><span style="color: #008000;">设置字体大小时 使用的式样 plugins/font/plugin.js</span>
+    config.fontSize_style =<span style="color: #000000;"> {
+        element   : </span>''span''<span style="color: #000000;">,
+        styles   : { </span>''font-size'' : ''#(size)''<span style="color: #000000;"> },
+        overrides : [ { element : </span>''font'', attributes : { ''size'' : <span style="color: #0000ff;">null</span><span style="color: #000000;"> } } ]
+    };
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">是否强制复制来的内容去除格式 plugins/pastetext/plugin.js</span>
+    config.forcePasteAsPlainText =<span style="color: #0000ff;">false</span> <span style="color: #008000;">//</span><span style="color: #008000;">不去除</span>
+    <span style="color: #008000;">//</span><span style="color: #008000;">是否强制用&ldquo;&amp;&rdquo;来代替&ldquo;&amp;amp;&rdquo;plugins/htmldataprocessor/plugin.js</span>
+    config.forceSimpleAmpersand = <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">对address标签进行格式化 plugins/format/plugin.js</span>
+    config.format_address = { element : ''address'', attributes : { class : ''styledAddress''<span style="color: #000000;"> } };
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">对DIV标签自动进行格式化 plugins/format/plugin.js</span>
+    config.format_div = { element : ''div'', attributes : { class : ''normalDiv''<span style="color: #000000;"> } };
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">对H1标签自动进行格式化 plugins/format/plugin.js</span>
+    config.format_h1 = { element : ''h1'', attributes : { class : ''contentTitle1''<span style="color: #000000;"> } };
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">对H2标签自动进行格式化 plugins/format/plugin.js</span>
+    config.format_h2 = { element : ''h2'', attributes : { class : ''contentTitle2''<span style="color: #000000;"> } };
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">对H3标签自动进行格式化 plugins/format/plugin.js</span>
+    config.format_h1 = { element : ''h3'', attributes : { class : ''contentTitle3''<span style="color: #000000;"> } };
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">对H4标签自动进行格式化 plugins/format/plugin.js</span>
+    config.format_h1 = { element : ''h4'', attributes : { class : ''contentTitle4''<span style="color: #000000;"> } };
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">对H5标签自动进行格式化 plugins/format/plugin.js</span>
+    config.format_h1 = { element : ''h5'', attributes : { class : ''contentTitle5''<span style="color: #000000;"> } };
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">对H6标签自动进行格式化 plugins/format/plugin.js</span>
+    config.format_h1 = { element : ''h6'', attributes : { class : ''contentTitle6''<span style="color: #000000;"> } };
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">对P标签自动进行格式化 plugins/format/plugin.js</span>
+    config.format_p = { element : ''p'', attributes : { class : ''normalPara''<span style="color: #000000;"> } };
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">对PRE标签自动进行格式化 plugins/format/plugin.js</span>
+    config.format_pre = { element : ''pre'', attributes : { class : ''code''<span style="color: #000000;"> } };
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">用分号分隔的标签名字 在工具栏上显示 plugins/format/plugin.js</span>
+    config.format_tags = ''p;h1;h2;h3;h4;h5;h6;pre;address;div''<span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">是否使用完整的html编辑模式 如使用，其源码将包含：&lt;html&gt;&lt;body&gt;&lt;/body&gt;&lt;/html&gt;等标签</span>
+    config.fullPage = <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">是否忽略段落中的空字符 若不忽略 则字符将以&ldquo;&rdquo;表示 plugins/wysiwygarea/plugin.js</span>
+    config.ignoreEmptyParagraph = <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">在清除图片属性框中的链接属性时 是否同时清除两边的&lt;a&gt;标签 plugins/image/plugin.js</span>
+    config.image_removeLinkByEmptyURL = <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">一组用逗号分隔的标签名称，显示在左下角的层次嵌套中 plugins/menu/plugin.js.</span>
+    config.menu_groups =''clipboard,form,tablecell,tablecellproperties,tablerow,tablecolumn,table,anchor,link,image,flash,checkbox,radio,textfield,hiddenfield,imagebutton,button,select,textarea''<span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">显示子菜单时的延迟，单位：ms plugins/menu/plugin.js</span>
+    config.menu_subMenuDelay = 400<span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">当执行&ldquo;新建&rdquo;命令时，编辑器中的内容 plugins/newpage/plugin.js</span>
+    config.newpage_html = ''''<span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">当从word里复制文字进来时，是否进行文字的格式化去除 plugins/pastefromword/plugin.js</span>
+    config.pasteFromWordIgnoreFontFace = <span style="color: #0000ff;">true</span>; <span style="color: #008000;">//</span><span style="color: #008000;">默认为忽略格式</span>
+    <span style="color: #008000;">//</span><span style="color: #008000;">是否使用&lt;h1&gt;&lt;h2&gt;等标签修饰或者代替从word文档中粘贴过来的内容 plugins/pastefromword/plugin.js</span>
+    config.pasteFromWordKeepsStructure = <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">从word中粘贴内容时是否移除格式 plugins/pastefromword/plugin.js</span>
+    config.pasteFromWordRemoveStyle = <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">对应后台语言的类型来对输出的HTML内容进行格式化，默认为空</span>
+    config.protectedSource.push( /&lt;"?["s"S]*?"?&gt;/g );   <span style="color: #008000;">//</span><span style="color: #008000;"> PHP Code</span>
+    config.protectedSource.push( <span style="color: #008000;">//</span><span style="color: #008000;">g );   // ASP Code</span>
+    config.protectedSource.push( /(]+&gt;["s|"S]*?&lt;"/asp:[^"&gt;]+&gt;)|(]+"/&gt;)/gi );   <span style="color: #008000;">//</span><span style="color: #008000;"> ASP.Net Code</span>
+    <span style="color: #008000;">//</span><span style="color: #008000;">当输入：shift+Enter时插入的标签</span>
+    config.shiftEnterMode = CKEDITOR.ENTER_P;  <span style="color: #008000;">//</span><span style="color: #008000;">可选：CKEDITOR.ENTER_BR或CKEDITOR.ENTER_DIV</span>
+    <span style="color: #008000;">//</span><span style="color: #008000;">可选的表情替代字符 plugins/smiley/plugin.js.</span>
+    config.smiley_descriptions =<span style="color: #000000;"> [
+        </span>'':)'', '':('', '';)'', '':D'', '':/'', '':P''<span style="color: #000000;">,
+        </span>'''', '''', '''', '''', '''', ''''<span style="color: #000000;">,
+        </span>'''', '';('', '''', '''', '''', ''''<span style="color: #000000;">,
+        </span>'''', '':kiss'', ''''<span style="color: #000000;"> ];
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">对应的表情图片 plugins/smiley/plugin.js</span>
+    config.smiley_images =<span style="color: #000000;"> [
+        </span>''regular_smile.gif'',''sad_smile.gif'',''wink_smile.gif'',''teeth_smile.gif'',''confused_smile.gif'',''tounge_smile.gif''<span style="color: #000000;">,
+        </span>''embaressed_smile.gif'',''omg_smile.gif'',''whatchutalkingabout_smile.gif'',''angry_smile.gif'',''angel_smile.gif'',''shades_smile.gif''<span style="color: #000000;">,
+        </span>''devil_smile.gif'',''cry_smile.gif'',''lightbulb.gif'',''thumbs_down.gif'',''thumbs_up.gif'',''heart.gif''<span style="color: #000000;">,
+        </span>''broken_heart.gif'',''kiss.gif'',''envelope.gif''<span style="color: #000000;">];
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">表情的地址 plugins/smiley/plugin.js</span>
+    config.smiley_path = ''plugins/smiley/images/''<span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">页面载入时，编辑框是否立即获得焦点 plugins/editingblock/plugin.js plugins/editingblock/plugin.js.</span>
+    config.startupFocus = <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">载入时，以何种方式编辑 源码和所见即所得 "source"和"wysiwyg" plugins/editingblock/plugin.js.</span>
+    config.startupMode =''wysiwyg''<span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">载入时，是否显示框体的边框 plugins/showblocks/plugin.js</span>
+    config.startupOutlineBlocks = <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">是否载入样式文件 plugins/stylescombo/plugin.js.</span>
+    config.stylesCombo_stylesSet = ''default''<span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">以下为可选</span>
+    config.stylesCombo_stylesSet = ''mystyles''<span style="color: #000000;">;
+    config.stylesCombo_stylesSet </span>= ''mystyles:/editorstyles/styles.js''<span style="color: #000000;">;
+    config.stylesCombo_stylesSet </span>= ''mystyles:http://www.example.com/editorstyles/styles.js''<span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">起始的索引值</span>
+    config.tabIndex = 0<span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">当用户键入TAB时，编辑器走过的空格数，(&amp;nbsp;) 当值为0时，焦点将移出编辑框 plugins/tab/plugin.js</span>
+    config.tabSpaces = 0<span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">默认使用的模板 plugins/templates/plugin.js.</span>
+    config.templates = ''default''<span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">用逗号分隔的模板文件plugins/templates/plugin.js.</span>
+    config.templates_files = [ ''plugins/templates/templates/default.js''<span style="color: #000000;"> ]
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">当使用模板时，&ldquo;编辑内容将被替换&rdquo;框是否选中 plugins/templates/plugin.js</span>
+    config.templates_replaceContent = <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">主题</span>
+    config.theme = ''default''<span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">撤销的记录步数 plugins/undo/plugin.js</span>
+    config.undoStackSize =20<span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;"> 在 CKEditor 中集成 CKFinder，注意 ckfinder 的路径选择要正确。</span>
+    <span style="color: #008000;">//</span><span style="color: #008000;">CKFinder.SetupCKEditor(null, ''/ckfinder/'');</span></pre>                       
+                   ', N'文本', 84, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (76, 5, N'二、 一些使用技巧                       
+                   ', N'文本', 83, 0, 1)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (77, 5, N'1、在页面中即时设置编辑器                       
+                   ', N'文本', 82, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (78, 5, N'<pre>&lt;script type="text/javascript"&gt;
+        <span style="color: #008000;">//</span><span style="color: #008000;"> 示例1：设置工具栏为基本工具栏，高度为70</span>
+        CKEDITOR.replace(''&lt;%=tbLink.ClientID.Replace("_","$") %&gt;''<span style="color: #000000;">,
+        { toolbar:</span>''Basic'', height:70<span style="color: #000000;"> });
+        </span><span style="color: #008000;">//</span><span style="color: #008000;">示例2：工具栏为自定义类型</span>
+        CKEDITOR.replace( ''editor1''<span style="color: #000000;">,
+        {
+             toolbar :
+             [
+                </span><span style="color: #008000;">//</span><span style="color: #008000;">加粗     斜体，     下划线      穿过线      下标字        上标字</span>
+                [''Bold'',''Italic'',''Underline'',''Strike'',''Subscript'',''Superscript''<span style="color: #000000;">],
+                </span><span style="color: #008000;">//</span><span style="color: #008000;"> 数字列表          实体列表            减小缩进    增大缩进</span>
+                [''NumberedList'',''BulletedList'',''-'',''Outdent'',''Indent''<span style="color: #000000;">],
+                </span><span style="color: #008000;">//</span><span style="color: #008000;">左对 齐             居中对齐          右对齐          两端对齐</span>
+                [''JustifyLeft'',''JustifyCenter'',''JustifyRight'',''JustifyBlock''<span style="color: #000000;">],
+                </span><span style="color: #008000;">//</span><span style="color: #008000;">超链接  取消超链接 锚点</span>
+                [''Link'',''Unlink'',''Anchor''<span style="color: #000000;">],
+                </span><span style="color: #008000;">//</span><span style="color: #008000;">图片    flash    表格       水平线            表情       特殊字符        分页符</span>
+                [''Image'',''Flash'',''Table'',''HorizontalRule'',''Smiley'',''SpecialChar'',''PageBreak''<span style="color: #000000;">],
+                </span>''/''<span style="color: #000000;">,
+                </span><span style="color: #008000;">//</span><span style="color: #008000;"> 样式       格式      字体    字体大小</span>
+                [''Styles'',''Format'',''Font'',''FontSize''<span style="color: #000000;">],
+                </span><span style="color: #008000;">//</span><span style="color: #008000;">文本颜色     背景颜色</span>
+                [''TextColor'',''BGColor''<span style="color: #000000;">],
+                </span><span style="color: #008000;">//</span><span style="color: #008000;">全屏           显示区块</span>
+                [''Maximize'', ''ShowBlocks'',''-''<span style="color: #000000;">]
+             ]
+        }
+    );
+</span>&lt;/script&gt;</pre>                       
+                   ', N'文本', 81, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (79, 5, N' 三、精简ckeditor                      
+                   ', N'文本', 80, 0, 1)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (80, 5, N'在部署到Web服务器上时，下列文件夹和文件都可以删除：                       
+                   ', N'文本', 79, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (81, 5, N'  /_samples ：示例文件夹；                      
+                   ', N'文本', 78, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (82, 5, N'/_source ：未压缩源程序；                       
+                   ', N'文本', 77, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (83, 5, N' /lang文件夹下除 zh-cn.js、en.js 以外的文件（也可以根据需要保留其他语言文件）；                      
+                   ', N'文本', 76, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (84, 5, N'根目录下的 changes.html(更新列表)，install.html(安装指向)，license.html(使用许可)；                       
+                   ', N'文本', 75, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (85, 5, N'  /skins 目录下不需要的皮肤，一般用V2(简单，朴素) ，如果只保留V2则必须在config.js中指定皮肤。                      
+                   ', N'文本', 74, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (86, 5, N' 四， 版本问题                      
+                   ', N'文本', 73, 0, 1)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (87, 5, N'在CKEditor的官方网站上下载，最要下载全部功能，最后得到的压缩包是ckeditor_4.1.1_full.zip，如果选择simple或者standed，可能会有些功能不能用，比如字体颜色，背景颜色，这下功能在standed版本里面就不支持。所以你会很奇怪明明设置了[''TextColor'',''BGColor'']，但是文本颜色和背景颜色选项就是不显示。                       
+                   ', N'文本', 72, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (88, 5, N'五，去掉默认的段落标记                       
+                   ', N'文本', 71, 0, 1)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (89, 5, N' 去除CKEditor自动添加的<p></p>标签的方法,其实很简单,有两种办法：                      
+                   ', N'文本', 70, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (90, 5, N'1.在ckeditor目录下的config.js添加以下配置参数即可:                       
+                   ', N'文本', 69, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (91, 5, N'<pre>config.enterMode = CKEDITOR.ENTER_BR：  屏蔽换行符&lt;br&gt;
+config.shiftEnterMode = CKEDITOR.ENTER_P:屏蔽段落&lt;p&gt;</pre>                       
+                   ', N'文本', 68, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (92, 5, N' 2.直接更改编辑器默认模式为源代码模式，在ckeditor目录下的config.js添加以下配置：                      
+                   ', N'文本', 67, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (93, 5, N'<pre>config.startupMode = ''source'';</pre>                       
+                   ', N'文本', 66, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (94, 5, N'六，和kcfinder搭配使用实现图片上传                       
+                   ', N'文本', 65, 0, 1)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (95, 5, N'老版本可以参考：CKEditor与CKFinder的配置（ASP.NET环境），                       
+                   ', N'文本', 64, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (96, 5, N'但是实际应用发现不行，新版本已经发生改变。                       
+                   ', N'文本', 63, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (97, 5, N'后来参考：CKEditor+CKFinder ASP版在本地电脑中的配置 发现也不行，设置如下：                       
+                   ', N'文本', 62, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (98, 5, N'<pre><span style="color: #000000;">第四步配置CKEditor下的config.js文件：
+
+下面的路径都要带上根目录(zhongyuan);
+
+ config.filebrowserBrowseUrl </span>= ''/zhongyuan/ckfinder/ckfinder.html''<span style="color: #000000;">;
+ config.filebrowserImageBrowseUrl </span>= ''/zhongyuan/ckfinder/ckfinder.html?Type=Images''<span style="color: #000000;">;
+ config.filebrowserFlashBrowseUrl </span>= ''/zhongyuan/ckfinder/ckfinder.html?Type=Flash''<span style="color: #000000;">;
+ config.filebrowserUploadUrl </span>= ''/zhongyuan/ckfinder/core/connector/asp/connector.asp?command=QuickUpload&amp;type=Files''<span style="color: #000000;">;
+ config.filebrowserImageUploadUrl </span>= ''/zhongyuan/ckfinder/core/connector/asp/connector.asp?command=QuickUpload&amp;type=Images''<span style="color: #000000;">;
+ config.filebrowserFlashUploadUrl </span>= ''/zhongyuan/ckfinder/core/connector/asp/connector.asp?command=QuickUpload&amp;type=Flash''<span style="color: #000000;">;
+
+</span><span style="color: #008000;">//</span><span style="color: #008000;">此代码为启用上传图片的功能</span></pre>                       
+                   ', N'文本', 61, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (99, 5, N'但是下载的CKFinder 根本就没有core目录，提示找不到文件：无语！这个要收费！好吧！再想办法！                       
+                   ', N'文本', 60, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (100, 5, N'参考：富文本文件CKEDITOR增加上传图片功能(.net)，ckeditor上传图片  发现可行！                       
+                   ', N'文本', 59, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (101, 5, N'七、 CKEDITOR增加上传图片功能(.net)                       
+                   ', N'文本', 58, 0, 1)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (102, 5, N'第一种方法使用CKEDITOR自身代码功能
+
+“预览”中有一大堆鸟语，看得很不爽。可以使用1或2来进行清除。                 
+                   ', N'文本', 57, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (103, 5, N'1：可以打开ckeditor/plugins/image/dialogs/image.js文件，搜索“b.config.image_previewText”就能找到这段鸟语了，(b.config.image_previewText||'''')单引号中的内容全删了，注意别删多了。                       
+                   ', N'文本', 56, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (104, 5, N'http://qqdb.oss-cn-beijing.aliyuncs.com/upload/blog/source/aa02e072-e994-462d-9b2f-f9dfbbd31525.jpg', N'图片', 55, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (105, 5, N'在此函数内，添加
+
+config.image_previewText = ''''; //清空预览区域显示内容
+                       
+                   ', N'文本', 54, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (106, 5, N'打开ckeditor/plugins/image/dialogs/image.js文件，搜索“upload”可以找到这一段
+
+ id:''Upload'',hidden:true
+
+ 实际上上传功能被隐藏了，把上面的true改成false，如果你的显示是hidden:!0,直接改成0即可，就可以显示了，再打开编辑器，就能找到上传功能了。
+
+设置上传到服务器按钮的事件URL，指定将上传的文件提交给那个URL进行处理，
+
+打开ckeditor/config.js文件，
+                       
+                   ', N'文本', 53, 0, 0)
+GO
+print 'Processed 100 total records'
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (107, 5, N'http://qqdb.oss-cn-beijing.aliyuncs.com/upload/blog/source/4a27afce-5ec8-4cf5-8618-de0db6a867fd.jpg', N'图片', 52, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (108, 5, N'  在此函数内，添加
+
+ config.filebrowserImageUploadUrl = ''../UploadImgHandler.ashx'';//设置提交上传图片按钮处理URL，我这里设置的提交给一个一般处理程序，这个是自己要创建的，我的是创建到根目录的，所以会有../，好了，下面开始编写UploadImgHandler.ashx''文件内的代码吧，如下：
+                     
+                   ', N'文本', 51, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (109, 5, N'  <pre>public <span style="color: #0000ff;">void</span><span style="color: #000000;"> ProcessRequest(HttpContext context)
+    {
+        String callback </span>= context.Request.QueryString["CKEditorFuncNum"<span style="color: #000000;">].ToString();
+        </span><span style="color: #008000;">//</span><span style="color: #008000;">/''遍历File表单元素</span>
+        HttpFileCollection files =<span style="color: #000000;"> HttpContext.Current.Request.Files;
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> iFile = 0; iFile &lt; files.Count; iFile++<span style="color: #000000;">)
+        {
+            </span><span style="color: #008000;">//</span><span style="color: #008000;">    ///''检查文件扩展名字</span>
+            HttpPostedFile postedFile =<span style="color: #000000;"> files[iFile];
+            </span><span style="color: #008000;">//</span><span style="color: #008000;">HttpPostedFile postedFile = files[0];</span>
+            string fileName;   <span style="color: #008000;">//</span><span style="color: #008000;">, fileExtension</span>
+            fileName =<span style="color: #000000;"> System.IO.Path.GetFileName(postedFile.FileName);
+
+
+            string fileContentType </span>=<span style="color: #000000;"> postedFile.ContentType.ToString();
+            </span><span style="color: #0000ff;">if</span> (fileContentType == "image/bmp" || fileContentType == "image/gif" ||<span style="color: #000000;">
+                fileContentType </span>== "image/png" || fileContentType == "image/x-png" || fileContentType == "image/jpeg"
+                || fileContentType == "image/pjpeg"<span style="color: #000000;">)
+            {
+                </span><span style="color: #0000ff;">if</span> (postedFile.ContentLength &lt;= 2097152<span style="color: #000000;">)
+                {
+                    string filepath </span>= postedFile.FileName;      <span style="color: #008000;">//</span><span style="color: #008000;">得到的是文件的完整路径,包括文件名，如：C:\Documents and Settings\Administrator\My Documents\My Pictures\20022775_m.jpg </span>
+                    <span style="color: #008000;">//</span><span style="color: #008000;">string filepath = FileUpload1.FileName;               //得到上传的文件名20022775_m.jpg </span>
+<span style="color: #000000;">
+                    string serverpath </span>= context.Server.MapPath("~/UpLoadFile/ImageUpload/") + fileName;<span style="color: #008000;">//</span><span style="color: #008000;">取得文件在服务器上保存的位置C:\Inetpub\wwwroot\WebSite1\images\20022775_m.jpg </span>
+<span style="color: #000000;">
+                    postedFile.SaveAs(serverpath);</span><span style="color: #008000;">//</span><span style="color: #008000;">上传图片到服务器指定地址</span>
+<span style="color: #000000;">
+                    string imageurl </span>= "http://localhost:13392/UpLoadFile/ImageUpload/" + fileName;<span style="color: #008000;">//</span><span style="color: #008000;">我是将测试时的本地地址+放置图像的文件夹+图片名称作为返回的URL</span>
+
+                    <span style="color: #008000;">//</span><span style="color: #008000;"> 返回"图像"选项卡并显示图片 </span>
+                    context.Response.Write("&lt;script type=\"text/javascript\"&gt;"<span style="color: #000000;">);
+                    context.Response.Write(</span>"window.parent.CKEDITOR.tools.callFunction(" +<span style="color: #000000;"> callback
+                           </span>+ ",''" + imageurl + "'','''')"<span style="color: #000000;">);
+                    context.Response.Write(</span>"&lt;/script&gt;"<span style="color: #000000;">);
+                }
+                </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+                {
+                    context.Response.Write(</span>"&lt;script&gt;alert(''上传文件不能大于2M！'')&lt;/script&gt;"<span style="color: #000000;">);
+                }
+            }
+            </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+            {
+                context.Response.Write(</span>"&lt;script&gt;alert(''只支持BMP、GIF、JPG、PNG格式的图片！'')&lt;/script&gt;"<span style="color: #000000;">);
+            }
+        }
+    }</span></pre>                     
+                   ', N'文本', 50, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (110, 5, N'好了，可以上传图片了！哈哈！剩下的方法还没有实验，保留下来，留待研究！
+
+好了，以上是使用CKEDITOR自身的上传功能，外加一个一般处理程序来完成上传功能。
+
+第二种设置上传功能方法：如果你已经有了自己的上传模板（我指的是一个单独的上传网页），
+                       
+                   ', N'文本', 49, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (111, 5, N'打开ckeditor/plugins/image/dialogs/image.js文件，搜索“urlMissing”可以找到这一段，在}，之后添加如下代码：
+
+{ type: ''button'', id: ''myUpload'', style:"margin-top:14px;", align: ''center'', label: ''本地上传'', onClick: function () { var retFile = showModalDialog("../UpLoadWeixinImg.aspx", "", "dialogHeight:380;dialogWidth:600;"); if (retFile != null) { this.getDialog().setValueOf(''info'', ''txtUrl'', retFile); } } },
+                       
+                   ', N'文本', 48, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (112, 5, N'showModalDialog("../UpLoadWeixinImg.aspx",指定转向URL的链接地址，上传模板，showModalDialog方法在IE和火狐下能正常运行，在谷歌浏览器下可能不兼容，反正我试了不行，听说用window.open可以代替，我没有去尝试，您可以去试下，                       
+                   ', N'文本', 47, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (113, 5, N'   下面来看看UpLoadWeixinImg.aspx上传页面模板的代码如下：                    
+                   ', N'文本', 46, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (114, 5, N'<pre><span style="color: #008000;">//</span><span style="color: #008000;">/ &lt;summary&gt;</span>
+        <span style="color: #008000;">//</span><span style="color: #008000;">/ 上传图片</span>
+        <span style="color: #008000;">//</span><span style="color: #008000;">/ &lt;/summary&gt;</span>
+        <span style="color: #008000;">//</span><span style="color: #008000;">/ &lt;param name="sender"&gt;&lt;/param&gt;</span>
+        <span style="color: #008000;">//</span><span style="color: #008000;">/ &lt;param name="e"&gt;&lt;/param&gt;</span>
+        protected <span style="color: #0000ff;">void</span><span style="color: #000000;"> LinkBtnFileUploadImg_Click(object sender, EventArgs e)
+        {
+            </span><span style="color: #0000ff;">if</span> (<span style="color: #0000ff;">this</span><span style="color: #000000;">.FileUploadImg.HasFile)
+            {
+                string fileContentType </span>=<span style="color: #000000;"> FileUploadImg.PostedFile.ContentType;
+                </span><span style="color: #0000ff;">if</span> (fileContentType == "image/bmp" || fileContentType == "image/gif"||<span style="color: #000000;">
+                    fileContentType </span>== "image/png"|| fileContentType == "image/x-png"|| fileContentType == "image/jpeg"
+                    || fileContentType == "image/pjpeg"<span style="color: #000000;">)
+                {
+                    </span><span style="color: #0000ff;">int</span> fileSize = <span style="color: #0000ff;">this</span><span style="color: #000000;">.FileUploadImg.PostedFile.ContentLength;
+
+                    </span><span style="color: #0000ff;">if</span> (fileSize &lt;= 2097152<span style="color: #000000;">)
+                    {
+                        string fileName </span>= <span style="color: #0000ff;">this</span>.FileUploadImg.PostedFile.FileName;                  <span style="color: #008000;">//</span><span style="color: #008000;"> 客户端文件路径</span>
+<span style="color: #000000;">
+                        string imageurl </span>= "http://localhost:8665/WeiXinImg/" +<span style="color: #000000;"> fileName;
+
+                        string filepath </span>= FileUploadImg.PostedFile.FileName;  <span style="color: #008000;">//</span><span style="color: #008000;">得到的是文件的完整路径,包括文件名，如：C:\Documents and Settings\Administrator\My Documents\My Pictures\20022775_m.jpg </span>
+                        <span style="color: #008000;">//</span><span style="color: #008000;">string filepath = FileUpload1.FileName;               //得到上传的文件名20022775_m.jpg </span>
+                        string filename = filepath.Substring(filepath.LastIndexOf("\\") + 1);<span style="color: #008000;">//</span><span style="color: #008000;">20022775_m.jpg </span>
+                        string serverpath = Server.MapPath("~/WeiXinImg/") + filename;<span style="color: #008000;">//</span><span style="color: #008000;">取得文件在服务器上保存的位置C:\Inetpub\wwwroot\WebSite1\images\20022775_m.jpg </span>
+                        <span style="color: #0000ff;">this</span>.FileUploadImg.PostedFile.SaveAs(serverpath);<span style="color: #008000;">//</span><span style="color: #008000;">将上传的文件另存为</span>
+
+　　　　　　　　　<span style="color: #008000;">//</span><span style="color: #008000;">此处我调用的是前台客户端的js脚本</span>
+                        ClientScript.RegisterStartupScript(<span style="color: #0000ff;">this</span>.GetType(), "SayHello", "&lt;script&gt;SayHello(''" + imageurl + "'')&lt;/script&gt;"<span style="color: #000000;">);
+                    }
+                    </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+                    {
+                        Response.Write(</span>"&lt;script&gt;alert(''上传文件不能大于2M！'')&lt;/script&gt;"<span style="color: #000000;">);
+                    }
+
+                }
+                </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+                {
+                    Response.Write(</span>"&lt;script&gt;alert(''只支持BMP、GIF、JPG、PNG格式的图片！'')&lt;/script&gt;"<span style="color: #000000;">);
+                }
+            }
+            </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+            {
+                Response.Write(</span>"&lt;script&gt;alert(''请选择图片！'')&lt;/script&gt;"<span style="color: #000000;">);
+            }
+        }
+
+ 
+
+SayHello脚本如下：
+
+ </span>&lt;script type="text/javascript"&gt;
+        <span style="color: #0000ff;">function</span><span style="color: #000000;"> SayHello(imgPath) {
+            window.returnValue </span>= imgPath; <span style="color: #008000;">//</span><span style="color: #008000;">上传后的图片链接</span>
+<span style="color: #000000;">            window.close();
+        }
+</span>&lt;/script&gt;</pre>                       
+                   ', N'文本', 45, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (115, 5, N'两种方式实现方式一样，具体哪个好用可以根据需要选择!                       
+                   ', N'文本', 44, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (116, 6, N'1 历史起源                       
+                   ', N'文本', 100, 0, 1)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (117, 6, N' SGML——1986年国际标准化组织出版发布了一个信息管理方面的国际标准（ISO 8879:1986信息处理）。                      
+                   ', N'文本', 99, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (118, 6, N'HTML 2.0——1995年11月作为RFC 1866发布                       
+                   ', N'文本', 98, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (119, 6, N'XML 1.0——1998年，W3C发布了XML1.0规范，使用它来简化Internet的文档信息传输                       
+                   ', N'文本', 97, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (120, 6, N'XHTML 1.0——2000年成为W3C的推荐标准                       
+                   ', N'文本', 96, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (121, 6, N'HTML5——2014年，W3C宣布，该标准制定完成                       
+                   ', N'文本', 95, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (122, 6, N'注意：HTML 1.0在1993年6月作为互联网工程工作小组（IETF）工作草案发布，并非标准。                       
+                   ', N'文本', 94, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (123, 6, N'从上表可以看出SGML最为古老，SGML成为国际标准的接近20年之后，HTML 2.0才称为W3C的推荐标准，XML发展的最晚，SGML和HTML显然是XML的先驱。                       
+                   ', N'文本', 93, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (124, 6, N'2 SGML简介                      
+                   ', N'文本', 92, 0, 1)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (125, 6, N'SGML是一个用于定义标记语言的系统。为用户提供一种类似语法的机制，用于定义文档的结构和指示文档结构的标签。                       
+                   ', N'文本', 91, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (126, 6, N'每一个使用SGML定义的标记语言都被称为SGML应用。一个SGML应用通常具有以下特点：                       
+                   ', N'文本', 90, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (127, 6, N'1.SGML声明。SGML声明指定义了应用程序中可能出现的字符和分隔符                       
+                   ', N'文本', 89, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (128, 6, N' 2.文档类型定义（DTD，document type definition）。DTD定义了标记构造的语法。DTD可能包含其他定义，如字符实体引用。                      
+                   ', N'文本', 88, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (129, 6, N' 3.描述标记所表达的语义。此规范还定义了无法在DTD中表达的语法的限制。                      
+                   ', N'文本', 87, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (130, 6, N' 4.包含数据（内容）和标记的文档实例。每个实例都包含一个对DTD的引用，用于解释它。                      
+                   ', N'文本', 86, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (131, 6, N'3 SGML与HTML                       
+                   ', N'文本', 85, 0, 1)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (132, 6, N'SGML与HTML有什么关系呢？HTML4以前的版本（包含HTML4）理论上是基于SGML的一个实例，因此需要在doctype中引用相关的DTD。之所以用理论上，是因为有人说HTML4以前的版本（不包含HTML4）并不严格符合SGML。                       
+                   ', N'文本', 84, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (133, 6, N' 下面简单介绍一下HTML是如何使用SGML构建的。                      
+                   ', N'文本', 83, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (134, 6, N'（1）元素                    
+                   ', N'文本', 82, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (135, 6, N' SGML文档类型定义声明了表示结构或所需行为的元素类型。HTML 包括表示段落、超文本链接、列表、表、图像等的元素类型。                      
+                   ', N'文本', 81, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (136, 6, N'每个元素类型声明通常描述三部分：开始标记、内容和结束标记。                       
+                   ', N'文本', 80, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (137, 6, N'元素的名称出现在开始标记（<element-name>）和结束标记（</element-name>）中，等等。                       
+                   ', N'文本', 79, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (138, 6, N'（2）属性                       
+                   ', N'文本', 78, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (139, 6, N'元素可能具有关联的属性，它们可能具有值。属性/值对出现在元素的开始标记的">"之前。由空格分割任意数量的属性值， 等等。
+                       
+                   ', N'文本', 77, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (140, 6, N'（3）字符引用                       
+                   ', N'文本', 76, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (141, 6, N' 字符引用可能包含在 HTML 文档中的字符的数字或符号名称。它们对于引用不常见的字符或那些编写工具很难键入的字符非常有用。字符引用以"&"标记开始，以分号（;）结束。一些常见的例子如下：                       
+                   ', N'文本', 75, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (142, 6, N'•"&lt;"代表 < 符号                       
+                   ', N'文本', 74, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (143, 6, N'•"&gt;" 代表> 符号                       
+                   ', N'文本', 73, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (144, 6, N'（4）注释                       
+                   ', N'文本', 72, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (145, 6, N' HTML注释以"<!--"开始，以"-->"结束。                     
+                   ', N'文本', 71, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (146, 6, N' 以上中所有的语法均依据HTML的文档类型定义(DTD)。                      
+                   ', N'文本', 70, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (147, 6, N'4 SGML与XML                       
+                   ', N'文本', 69, 0, 1)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (148, 6, N'SGML与XML有是什么关系呢？XML是SGML的一个子集，比SGML要简单，但是能实现SGML的大部分功能。                       
+                   ', N'文本', 68, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (149, 6, N' 5 XHTML与XML                      
+                   ', N'文本', 67, 0, 1)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (150, 6, N'之后发展的XHTML是基于XML的一个应用，XHTML的出现是为了解决HTML语法要求松散的问题，它的语法要求更严格。                       
+                   ', N'文本', 66, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (151, 6, N'6 HTML5                       
+                   ', N'文本', 65, 0, 1)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (152, 6, N'如今的HTML5标准制定了两种实现语法HTML和XHTML。HTML不再基于任何特定的标记语言系统，它有自己完整的标准。而XHTML是XML的一个应用。                       
+                   ', N'文本', 64, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (153, 6, N'备注：当HTML5文档使用text/html MIME类型传输时，它将被Web浏览器是为HTML文档处理。当使用XML MIME类型，例如application/xhtml+xml传输时，它将被Web浏览器视为XML文档，由XML处理器进行分析。                       
+                   ', N'文本', 63, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (154, 6, N' 参考资料                      
+                   ', N'文本', 62, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (155, 6, N'1 On SGML and HTML - W3C https://www.w3.org/TR/html4/intro/sgmltut.html                       
+                   ', N'文本', 61, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (156, 6, N'2 HTML 5.2 - W3C https://www.w3.org/TR/html5/introduction.html#html-vs-xhtml                       
+                   ', N'文本', 60, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (157, 6, N'3 标准通用标志语言 - 百度百科 https://baike.baidu.com/item/%E6%A0%87%E5%87%86%E9%80%9A%E7%94%A8%E7%BD%AE%E6%A0%87%E8%AF%AD%E8%A8%80/10471466?fr=aladdin&fromid=2901416&fromtitle=SGML                       
+                   ', N'文本', 59, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (158, 6, N'4 HTML - 百度百科 https://baike.baidu.com/item/HTML                       
+                   ', N'文本', 58, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (159, 6, N'5 可扩展标记语言 - 百度百科 https://baike.baidu.com/item/%E5%8F%AF%E6%89%A9%E5%B1%95%E6%A0%87%E8%AE%B0%E8%AF%AD%E8%A8%80?fromtitle=xml&fromid=86251                       
+                   ', N'文本', 57, 0, 0)
+INSERT [dbo].[News_Content] ([ID], [NewsID], [N_Content], [attributes], [weight], [State], [Headings]) VALUES (160, 6, N' 6 《HTML5秘籍》https://book.douban.com/subject/11610880/                      
+                   ', N'文本', 56, 0, 0)
+SET IDENTITY_INSERT [dbo].[News_Content] OFF
+/****** Object:  Table [dbo].[News]    Script Date: 01/17/2018 14:55:46 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[News](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[CategoryID] [int] NOT NULL,
+	[Title] [nvarchar](50) NULL,
+	[Release_time] [datetime] NULL,
+	[Release_people] [nvarchar](50) NULL,
+	[Click] [int] NULL,
+	[IsHost] [bit] NULL,
+	[State] [bit] NULL,
+ CONSTRAINT [PK_News] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'新闻ID' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'News', @level2type=N'COLUMN',@level2name=N'ID'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'分类ID' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'News', @level2type=N'COLUMN',@level2name=N'CategoryID'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'新闻标题' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'News', @level2type=N'COLUMN',@level2name=N'Title'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'发布时间' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'News', @level2type=N'COLUMN',@level2name=N'Release_time'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'发布人' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'News', @level2type=N'COLUMN',@level2name=N'Release_people'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'点击量' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'News', @level2type=N'COLUMN',@level2name=N'Click'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'是否热门' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'News', @level2type=N'COLUMN',@level2name=N'IsHost'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'是否禁用此贴' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'News', @level2type=N'COLUMN',@level2name=N'State'
+GO
+SET IDENTITY_INSERT [dbo].[News] ON
+INSERT [dbo].[News] ([ID], [CategoryID], [Title], [Release_time], [Release_people], [Click], [IsHost], [State]) VALUES (1, 2, N'基于时间的一次性密码 TOTP', CAST(0x0000A85D00000000 AS DateTime), N'彭博', 0, 1, 0)
+INSERT [dbo].[News] ([ID], [CategoryID], [Title], [Release_time], [Release_people], [Click], [IsHost], [State]) VALUES (3, 3, N'Meltdown 和 Spectre 来袭，你的机器还好吗？', CAST(0x0000A86100000000 AS DateTime), N'小博', 0, 1, 0)
+INSERT [dbo].[News] ([ID], [CategoryID], [Title], [Release_time], [Release_people], [Click], [IsHost], [State]) VALUES (4, 2, N'红包的随机算法基础实现', CAST(0x0000A86400000000 AS DateTime), N'小博', 0, 1, 0)
+INSERT [dbo].[News] ([ID], [CategoryID], [Title], [Release_time], [Release_people], [Click], [IsHost], [State]) VALUES (5, 4, N'富文本编辑器 CKeditor 配置使用+上传图片', CAST(0x0000A86600000000 AS DateTime), N'小博', 0, 0, 0)
+INSERT [dbo].[News] ([ID], [CategoryID], [Title], [Release_time], [Release_people], [Click], [IsHost], [State]) VALUES (6, 5, N'SGML/HTML/XML之间的关系', CAST(0x0000A86B00000000 AS DateTime), N'小博', 0, 0, 0)
+SET IDENTITY_INSERT [dbo].[News] OFF
+/****** Object:  Table [dbo].[Give_a_like]    Script Date: 01/17/2018 14:55:46 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Give_a_like](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[NewsID] [int] NOT NULL,
+	[Number] [int] NULL,
+ CONSTRAINT [PK_Give_a_like] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'点赞ID' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Give_a_like', @level2type=N'COLUMN',@level2name=N'ID'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'新闻ID' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Give_a_like', @level2type=N'COLUMN',@level2name=N'NewsID'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'点赞数量' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Give_a_like', @level2type=N'COLUMN',@level2name=N'Number'
+GO
+SET IDENTITY_INSERT [dbo].[Give_a_like] ON
+INSERT [dbo].[Give_a_like] ([ID], [NewsID], [Number]) VALUES (1, 5, 17)
+INSERT [dbo].[Give_a_like] ([ID], [NewsID], [Number]) VALUES (2, 4, 5)
+INSERT [dbo].[Give_a_like] ([ID], [NewsID], [Number]) VALUES (6, 3, 5)
+INSERT [dbo].[Give_a_like] ([ID], [NewsID], [Number]) VALUES (19, 1, 5)
+INSERT [dbo].[Give_a_like] ([ID], [NewsID], [Number]) VALUES (20, 6, 9)
+SET IDENTITY_INSERT [dbo].[Give_a_like] OFF
+/****** Object:  Table [dbo].[Caegory]    Script Date: 01/17/2018 14:55:46 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Caegory](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[CategoryName] [nvarchar](50) NULL,
+	[Categry_describe] [nvarchar](50) NULL,
+ CONSTRAINT [PK_NewClass] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'分类ID' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Caegory', @level2type=N'COLUMN',@level2name=N'ID'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'分类名称' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Caegory', @level2type=N'COLUMN',@level2name=N'CategoryName'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'分类描述' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Caegory', @level2type=N'COLUMN',@level2name=N'Categry_describe'
+GO
+SET IDENTITY_INSERT [dbo].[Caegory] ON
+INSERT [dbo].[Caegory] ([ID], [CategoryName], [Categry_describe]) VALUES (2, N'编程算法', N'此类别的帖子是介绍一些编写过程中的一些算法的逻辑！')
+INSERT [dbo].[Caegory] ([ID], [CategoryName], [Categry_describe]) VALUES (3, N'安全攻防', N'此分类主要是有关于网络安全等方面')
+INSERT [dbo].[Caegory] ([ID], [CategoryName], [Categry_describe]) VALUES (4, N'ASP.NET', N'此分类主要是分享一些.NET相关方面的技术')
+INSERT [dbo].[Caegory] ([ID], [CategoryName], [Categry_describe]) VALUES (5, N'前台技术', N'此分类主要是一些前台页面的技术贴')
+SET IDENTITY_INSERT [dbo].[Caegory] OFF
+/****** Object:  Default [DF_News_Release_time]    Script Date: 01/17/2018 14:55:46 ******/
+ALTER TABLE [dbo].[News] ADD  CONSTRAINT [DF_News_Release_time]  DEFAULT (getdate()) FOR [Release_time]
+GO

@@ -1,0 +1,11 @@
+<div  id="cityDiv">
+                                            <select class="prov" id="sel_province"></select> 
+                                            <select class="city" id="sel_city" disabled="disabled"></select>
+                                            <select class="dist" id="sel_area" disabled="disabled"></select>
+                                        </div>
+
+
+    <script src="js/citys/jquery.cityselect.js"></script>
+    <script>
+        $("#cityDiv").citySelect({ nodata: "none", required: false });
+    </script>
